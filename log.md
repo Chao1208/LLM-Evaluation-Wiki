@@ -95,3 +95,13 @@
 - 已有（跳过）: inspect_ai
 - 路径: `raw/github/`，共 28 个仓库
 - 备注: 仅 clone，未 ingest
+
+## [2026-04-21] ingest | 高引用论文补充摄取（Step 3）
+- 资料路径: `raw/papers/` 下 5 篇跨引用最多的评测相关论文
+- 新建摘要页:
+  - wiki/sources/mt-bench-chatbot-arena.md — MT-Bench & Chatbot Arena (2306.05685)
+  - wiki/sources/gpt4-technical-report.md — GPT-4 Technical Report (2303.08774)
+  - wiki/sources/instructgpt.md — InstructGPT / RLHF (2203.02155)
+  - wiki/sources/chain-of-thought.md — Chain-of-Thought Prompting (2201.11903)
+  - wiki/sources/mmlu.md — MMLU 多任务理解基准 (2009.03300)
+- 更新页面: index.md, log.md
