@@ -1,6 +1,6 @@
 # LLM Evaluation Wiki 索引
 
-> 最后更新: 2026-04-21 | 总页面数: 62 | 总资料数: 46
+> 最后更新: 2026-04-21 | 总页面数: 67 | 总资料数: 51
 
 ## 资料摘要
 | 页面 | 类型 | 摘要 | 日期 |
@@ -51,6 +51,11 @@
 | [临床预测模型评估](wiki/sources/clinical-prediction-model-eval.md) | 论文 | BMJ 2024, TRIPOD+AI 指南，区分度/校准/决策曲线 | 2026-04-21 |
 | [ML 模型评估方法论](wiki/sources/ml-model-evaluation.md) | 论文 | Varoquaux & Colliot 2023, 交叉验证/偏差-方差/评估指标 | 2026-04-21 |
 | [过拟合与模型调优](wiki/sources/overfitting-model-tuning.md) | 论文 | Montesinos López 2022, 正则化/超参调优/验证策略 | 2026-04-21 |
+| [MT-Bench & Chatbot Arena](wiki/sources/mt-bench-chatbot-arena.md) | 论文 | LMSYS, 80 题多轮基准 + 众包 ELO 对战，GPT-4 Judge 与人类一致率 >80% | 2026-04-21 |
+| [GPT-4 Technical Report](wiki/sources/gpt4-technical-report.md) | 论文 | OpenAI, 多模态大模型，Bar Exam 90th 百分位，MMLU 86.4%，可预测扩展 | 2026-04-21 |
+| [InstructGPT](wiki/sources/instructgpt.md) | 论文 | OpenAI, RLHF 对齐里程碑，1.3B InstructGPT 优于 175B GPT-3，SFT→RM→PPO | 2026-04-21 |
+| [Chain-of-Thought Prompting](wiki/sources/chain-of-thought.md) | 论文 | Google, CoT 推理提示，>100B 模型涌现能力，GSM8K +39pp | 2026-04-21 |
+| [MMLU](wiki/sources/mmlu.md) | 论文 | UC Berkeley, 57 学科 15,908 题多任务理解基准，LLM 评测事实标准 | 2026-04-21 |
 
 ## 模型
 | 页面 | 机构 | 摘要 | 资料数 |
