@@ -3,7 +3,7 @@ title: "Rubric-Forge"
 type: entity
 entity_type: tool
 created: 2026-04-09
-updated: 2026-04-09
+updated: 2026-04-22
 tags: [评测工具, rubric, 自动评分, 百度]
 sources: [raw/report/Rubric-Forge：基于 Rubric 的 LLM 自动评分系统.md]
 ---

@@ -347,6 +347,6 @@ sources: [规范_全局情绪0414.md, 切片抽帧_描述与重建.md]
 
 ## 相关页面
 
-- [数字人视频重建质量评测方法](digital-human-video-evaluation.md)（行业综述）
-- [Rubric-Based 评测方法论](rubric-based-evaluation.md)（Rubric 设计方法论参考）
-- [LLM-as-Judge](llm-as-judge.md)（VLM-as-Judge 衔接参考）
+- [数字人视频重建质量评测方法](../concepts/digital-human-video-evaluation.md)（行业综述）
+- [Rubric-Based 评测方法论](../concepts/rubric-based-evaluation.md)（Rubric 设计方法论参考）
+- [LLM-as-Judge](../concepts/llm-as-judge.md)（VLM-as-Judge 衔接参考）

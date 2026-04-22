@@ -1,6 +1,6 @@
 # LLM Evaluation Wiki 索引
 
-> 最后更新: 2026-04-21 | 总页面数: 67 | 总资料数: 51
+> 最后更新: 2026-04-22 | 总页面数: 98 | 总资料数: 73
 
 ## 资料摘要
 | 页面 | 类型 | 摘要 | 日期 |
@@ -22,7 +22,7 @@
 | [长上下文扩展](wiki/sources/effective-long-context.md) | 论文 | Meta NAACL 2024, Llama 2 → 32K 上下文，RoPE 缩放 | 2026-04-21 |
 | [RewardBench](wiki/sources/rewardbench.md) | 论文 | NAACL 2025, RLHF 奖励模型评测基准，生成式 Judge 有竞争力 | 2026-04-21 |
 | [AGIEval](wiki/sources/agieval.md) | 论文 | NAACL 2024, 20 项真实考试任务，双语（中英），人类中心评测 | 2026-04-21 |
-| [MME 多模态评测](wiki/sources/mme.md) | 论文 | NeurIPS 2025, 14 子任务覆盖感知+认知，Yes/No 客观评测 | 2026-04-21 |
+| [MME 多模态评测](wiki/sources/mme.md) | 论文 | 14 子任务覆盖感知+认知，Yes/No 客观评测 | 2026-04-21 |
 | [MMBench](wiki/sources/mmbench.md) | 论文 | Shanghai AI Lab, ~3000 选择题，20 细粒度能力，CircularEval | 2026-04-21 |
 | [MM-Vet](wiki/sources/mm-vet.md) | 论文 | ICML 2024, 6 核心 VL 能力集成评测，218 题，GPT-4 Judge | 2026-04-21 |
 | [MathVista](wiki/sources/mathvista.md) | 论文 | ICLR 2024, 6141 样本，视觉数学推理，28+3 数据集整合 | 2026-04-21 |
@@ -56,6 +56,28 @@
 | [InstructGPT](wiki/sources/instructgpt.md) | 论文 | OpenAI, RLHF 对齐里程碑，1.3B InstructGPT 优于 175B GPT-3，SFT→RM→PPO | 2026-04-21 |
 | [Chain-of-Thought Prompting](wiki/sources/chain-of-thought.md) | 论文 | Google, CoT 推理提示，>100B 模型涌现能力，GSM8K +39pp | 2026-04-21 |
 | [MMLU](wiki/sources/mmlu.md) | 论文 | UC Berkeley, 57 学科 15,908 题多任务理解基准，LLM 评测事实标准 | 2026-04-21 |
+| [BLIP-2](wiki/sources/blip2.md) | 论文 | Salesforce, Q-Former 桥接冻结图像编码器与 LLM，188M 参数超 Flamingo80B | 2026-04-22 |
+| [LLaVA](wiki/sources/llava.md) | 论文 | NeurIPS 2023, 视觉指令微调，GPT-4 数据生成，LLaVA-Bench | 2026-04-22 |
+| [Llama 2](wiki/sources/llama2.md) | 论文 | Meta, 7B-70B 开源模型，RLHF 方法论，安全评测体系，"质量重于数量" | 2026-04-22 |
+| [Rubicon 框架报道](wiki/sources/rubicon-news.md) | 新闻 | 蚂蚁浙大 Rubric 驱动 RL，Veto/饱和度感知聚合，5000+样本击败 671B | 2026-04-22 |
+| [Rubric Is All You Need 博客](wiki/sources/rubric-all-you-need-blog.md) | 博客 | CRE/PRE/EME 三种评估方法技术解读，Leniency 指标 | 2026-04-22 |
+| [Rubric Python 库](wiki/sources/rubric-lib-repo.md) | 仓库 | The LLM Data Company, 加权 Rubric 评测库，三种评分策略，RL 训练支持 | 2026-04-22 |
+| [DR Tulu](wiki/sources/dr-tulu-repo.md) | 仓库 | Ai2, 演化 Rubric RL 训练深度研究 agent，8B 匹配 OpenAI DR | 2026-04-22 |
+| [C-Eval 仓库](wiki/sources/ceval-repo.md) | 仓库 | SJTU-LIT, 13,948 道多选题覆盖 52 学科，NeurIPS 2023，中文考试型评测 | 2026-04-22 |
+| [CLUE 仓库](wiki/sources/clue-repo.md) | 仓库 | CLUEbenchmark 社区, 9 个 NLU 任务+14G 语料库，COLING 2020，中文语言理解基准 | 2026-04-22 |
+| [ChineseGLUE 仓库](wiki/sources/chineseglue-repo.md) | 仓库 | CLUEbenchmark 社区, 13 个任务经典版，中文 NLU 基准先驱 | 2026-04-22 |
+| [SuperCLUE 仓库](wiki/sources/superclue-repo.md) | 仓库 | CLUEbenchmark 社区, 中文大模型综合评测，四大象限十大能力，含 Agent 和安全 | 2026-04-22 |
+| [Prometheus 仓库](wiki/sources/prometheus-repo.md) | 仓库 | KAIST AI, 开源评测 LM，Rubric 驱动细粒度评测，Feedback Collection 数据集 | 2026-04-22 |
+| [OpenCompass 评测平台](wiki/sources/opencompass-repo.md) | 仓库 | 上海 AI Lab, 一站式评测平台，70+ 数据集，20+ 模型，CompassKit/Hub/Rank 三件套 | 2026-04-22 |
+| [lm-evaluation-harness](wiki/sources/lm-evaluation-harness-repo.md) | 仓库 | EleutherAI, 60+ benchmark，HuggingFace Open LLM Leaderboard 后端，行业事实标准 | 2026-04-22 |
+| [HELM 评测框架](wiki/sources/helm-repo.md) | 仓库 | Stanford CRFM, 全面评测框架，多维度指标，扩展至 VHELM/HEIM/MedHELM 等 | 2026-04-22 |
+| [AlpacaEval 自动评估器](wiki/sources/alpaca-eval-repo.md) | 仓库 | Stanford Tatsu Lab, LLM-as-Judge 成对评测，LC Win Rate 与 Arena 相关 0.98 | 2026-04-22 |
+| [FastChat 平台](wiki/sources/fastchat-repo.md) | 仓库 | LMSYS/UC Berkeley, Chatbot Arena 底层平台，MT-Bench，Vicuna 训练/服务/评测 | 2026-04-22 |
+| [HumanEval 仓库](wiki/sources/human-eval-repo.md) | 仓库 | OpenAI, 164 道 Python 代码生成题，pass@k 指标，执行式评测范式 | 2026-04-22 |
+| [EvalScope 仓库](wiki/sources/evalscope-repo.md) | 仓库 | 阿里/ModelScope, 多后端评测框架，50+ 基准，LLM/VLM/Agent/Audio | 2026-04-22 |
+| [Inspect AI 仓库](wiki/sources/inspect-ai-repo.md) | 仓库 | UK AISI, 200+ 预置评测，可组合组件，政府级 AI 安全评测基础设施 | 2026-04-22 |
+| [PromptBench 仓库](wiki/sources/promptbench-repo.md) | 仓库 | Microsoft, Prompt 鲁棒性评测，4 级对抗攻击，DyVal 动态评测 | 2026-04-22 |
+| [BEIR 仓库](wiki/sources/beir-repo.md) | 仓库 | TU Darmstadt, 17 数据集信息检索评测，零样本迁移，多架构支持 | 2026-04-22 |
 
 ## 模型
 | 页面 | 机构 | 摘要 | 资料数 |
@@ -78,6 +100,8 @@
 | [OpenAI](wiki/entities/openai.md) | 机构 | GPT 系列开发者，HealthBench 与 simple-evals 开发者 | 2 |
 | [Harvey AI](wiki/entities/harvey-ai.md) | 机构 | 法律 AI 公司，BigLaw Bench 开发者，18 人团队 | 2 |
 | [Meta](wiki/entities/meta.md) | 机构 | Llama 系列开发者，AdvancedIF 开发者 | 2 |
+| [LMSYS / Stanford](wiki/entities/lmsys.md) | 机构 | MT-Bench & Chatbot Arena、FastChat、AlpacaEval、HELM 开发者 | 5 |
+| [Google](wiki/entities/google.md) | 机构 | IFEval、Chain-of-Thought 提出者，Gemini 系列开发者 | 2 |
 
 ## 概念与方法论
 | 页面 | 摘要 | 资料数 |
@@ -85,6 +109,13 @@
 | [Rubric-Based 评测方法论](wiki/concepts/rubric-based-evaluation.md) | 细粒度评分标准替代模糊打分，五大原则、六阶段构建流程、四种指标体系 | 5 |
 | [LLM-as-Judge](wiki/concepts/llm-as-judge.md) | 用 LLM 作为自动评审者，三种校准方法，一致率基准，零样本+CoT 评测范式 | 4 |
 | [数字人视频重建质量评测方法](wiki/concepts/digital-human-video-evaluation.md) | 数字人视频重建评测全景：自动指标（CSIM/LPIPS/FVD/LSE 等）、人工 MOS/成对对比、VLM-as-Judge 新范式 | 0 |
+| [RLHF](wiki/concepts/rlhf.md) | 基于人类反馈的强化学习，SFT→RM→PPO 经典流程，DPO/RLVR/Rubric-driven RL 演进方向 | 7 |
+| [多模态大模型评测](wiki/concepts/multimodal-evaluation.md) | VLM 评测基准全景（MME/MMBench/MM-Vet/MathVista/EvalCrafter），评测方法论，BLIP-2/LLaVA 里程碑 | 8 |
+| [评测框架与工具](wiki/concepts/evaluation-frameworks.md) | 12 个开源评测框架对比选型（OpenCompass/lm-eval-harness/HELM/EvalScope/Inspect AI 等） | 12 |
+| [中文评测基准](wiki/concepts/chinese-evaluation-benchmarks.md) | ChineseGLUE→CLUE→C-Eval→SuperCLUE 发展脉络，中文特有评测挑战 | 5 |
+| [代码生成评测](wiki/concepts/code-evaluation.md) | pass@k 执行式评测，函数→类→项目粒度演进，HumanEval/ClassEval/PolyCoder 对比 | 3 |
+| [领域专项评测](wiki/concepts/domain-specific-evaluation.md) | 医疗/法律/金融/翻译/创作/长上下文六大领域评测全景，共性挑战分析 | 9 |
+| [评测方法论基础](wiki/concepts/evaluation-methodology-foundations.md) | LLM 评测综述（What/Where/How）、幻觉分类、IRA/Kappa 统计方法、过拟合检测 | 7 |
 
 ## 工具
 | 页面 | 摘要 | 资料数 |

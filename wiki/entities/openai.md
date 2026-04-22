@@ -3,7 +3,7 @@ title: "OpenAI"
 type: entity
 entity_type: organization
 created: 2026-04-09
-updated: 2026-04-09
+updated: 2026-04-22
 tags: [机构, LLM, 评测, simple-evals]
 sources: [raw/report/Rubric-Based推理数据调研报告.md, raw/benchmarks/HealthBench-simple-evals/README.md]
 ---
@@ -58,8 +58,27 @@ sources: [raw/report/Rubric-Based推理数据调研报告.md, raw/benchmarks/Hea
 - MGSM 和 DROP 被认为对新模型已饱和
 - o3/o4-mini 测试时未启用任何 tools
 
+## 核心论文
+
+### InstructGPT（2022）
+- RLHF 对齐里程碑：1.3B InstructGPT 优于 175B GPT-3
+- SFT → RM → PPO 三阶段训练流程
+- 详见：[InstructGPT 论文摘要](../sources/instructgpt.md)
+
+### GPT-4 Technical Report（2023）
+- 多模态大模型，Bar Exam 90th 百分位，[MMLU](../sources/mmlu.md) 86.4%
+- 可预测扩展（Predictable Scaling）
+- 详见：[GPT-4 论文摘要](../sources/gpt4-technical-report.md)
+
 ## 相关页面
 
 - [HealthBench](../benchmarks/healthbench.md)
+- [InstructGPT 论文](../sources/instructgpt.md)
+- [GPT-4 Technical Report](../sources/gpt4-technical-report.md)
+- [MT-Bench & Chatbot Arena](../sources/mt-bench-chatbot-arena.md)
+- [MMLU](../sources/mmlu.md)
+- [Chain-of-Thought Prompting](../sources/chain-of-thought.md)
+- [HumanEval 仓库](../sources/human-eval-repo.md)
+- [RewardBench](../sources/rewardbench.md)
 - [调研报告](../sources/rubric-based-reasoning-data-survey.md)
 - [simple-evals 仓库](../sources/simple-evals-repo.md)
