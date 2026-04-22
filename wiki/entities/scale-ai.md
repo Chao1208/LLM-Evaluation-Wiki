@@ -3,7 +3,7 @@ title: "Scale AI"
 type: entity
 entity_type: organization
 created: 2026-04-09
-updated: 2026-04-09
+updated: 2026-04-22
 tags: [机构, 数据标注, 评测]
 sources: [raw/report/Rubric-Based推理数据调研报告.md, raw/benchmarks/PRBench/README.md]
 ---

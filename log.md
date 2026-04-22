@@ -1,5 +1,57 @@
 # Wiki 操作日志
 
+## [2026-04-22] aggregate | 6 个主题聚合概念页
+- 目的: 消除 36 个孤立资料页，按主题建立导航聚合
+- 新建页面:
+  - wiki/concepts/multimodal-evaluation.md — 多模态大模型评测（8 个资料页聚合）
+  - wiki/concepts/evaluation-frameworks.md — 评测框架与工具（12 个资料页聚合）
+  - wiki/concepts/chinese-evaluation-benchmarks.md — 中文评测基准（5 个资料页聚合）
+  - wiki/concepts/code-evaluation.md — 代码生成评测（3 个资料页聚合）
+  - wiki/concepts/domain-specific-evaluation.md — 领域专项评测（9 个资料页聚合）
+  - wiki/concepts/evaluation-methodology-foundations.md — 评测方法论基础（7 个资料页聚合）
+- 更新页面: index.md, log.md
+- 总页面数: 98
+
+## [2026-04-22] lint | 健康检查与修复
+- 发现问题: 57 个（5 CRITICAL, 30 IMPORTANT, 22 MINOR）
+- 已修复:
+  - **C-1**: 修复 digital-human-eval-rubric-v1.md 中 3 个断裂链接（补全 `../concepts/` 前缀）
+  - **C-2**: 修复 rubicon-news.md YAML frontmatter 中文引号解析问题（双引号→单引号）
+  - **C-3**: 修正 rubric-based-evaluation.md 中 criteria 数量描述（"2~3 条"→"~4.4 条"）
+  - **C-4**: 更新 index.md 页面总数（85→92）
+  - **C-5**: 修正 mme.md 发表会议（"NeurIPS 2025"→"arXiv 2023"）
+  - 更新 4 个实体页 updated 日期（openai, harvey-ai, rubric-forge, scale-ai）
+  - 新建 3 个缺失页面: google.md（实体）、lmsys.md（实体）、rlhf.md（概念）
+  - 添加跨页面链接: openai→human-eval-repo/rewardbench, meta→llava/effective-long-context, llm-as-judge→prometheus-repo/alpaca-eval/fastchat/rlhf
+- 待修复: 22 个 MINOR 问题（孤立资料页缺少入链）
+
+## [2026-04-22] create | LMSYS / Stanford 实体页
+- 新建页面: wiki/entities/lmsys.md
+- 内容: LMSYS（UC Berkeley）与 Stanford 的评测贡献汇总——MT-Bench、Chatbot Arena、FastChat、AlpacaEval、HELM
+- 更新页面: index.md, log.md
+
+## [2026-04-22] ingest | 5 个评测框架 GitHub 仓库 README 批量摄取
+- 资料路径: `raw/github/opencompass/README.md`, `raw/github/lm-evaluation-harness/README.md`, `raw/github/helm/README.md`, `raw/github/alpaca_eval/README.md`, `raw/github/FastChat/README.md`
+- 摘要页:
+  - wiki/sources/opencompass-repo.md -- OpenCompass 一站式评测平台（上海 AI Lab，70+ 数据集，多推理后端）
+  - wiki/sources/lm-evaluation-harness-repo.md -- lm-evaluation-harness（EleutherAI，Open LLM Leaderboard 后端，60+ benchmark）
+  - wiki/sources/helm-repo.md -- HELM 全面评测框架（Stanford CRFM，多维度指标，VHELM/MedHELM 扩展）
+  - wiki/sources/alpaca-eval-repo.md -- AlpacaEval 自动评估器（Stanford Tatsu Lab，LC Win Rate，与 Arena 0.98 相关）
+  - wiki/sources/fastchat-repo.md -- FastChat 平台（LMSYS，Chatbot Arena 底层，MT-Bench，Vicuna）
+- 新建页面: opencompass-repo.md, lm-evaluation-harness-repo.md, helm-repo.md, alpaca-eval-repo.md, fastchat-repo.md
+- 更新页面: index.md, log.md
+
+## [2026-04-22] ingest | 5 个 GitHub 仓库 README 批量摄取
+- 资料路径: `raw/github/ceval/README.md`, `raw/github/CLUE/README.md`, `raw/github/ChineseGLUE/README.md`, `raw/github/SuperCLUE/README.md`, `raw/github/prometheus/README.md`
+- 摘要页:
+  - wiki/sources/ceval-repo.md -- C-Eval 中文考试型评测基准（52 学科，13,948 题，NeurIPS 2023）
+  - wiki/sources/clue-repo.md -- CLUE 中文语言理解评测基准（9 个 NLU 任务，COLING 2020）
+  - wiki/sources/chineseglue-repo.md -- ChineseGLUE 经典版（13 个任务，CLUE 前身）
+  - wiki/sources/superclue-repo.md -- SuperCLUE 中文大模型综合评测（四大象限，含 Agent 和安全）
+  - wiki/sources/prometheus-repo.md -- Prometheus 开源评测 LM（Rubric 驱动，Feedback Collection 数据集）
+- 新建页面: ceval-repo.md, clue-repo.md, chineseglue-repo.md, superclue-repo.md, prometheus-repo.md
+- 更新页面: index.md, log.md
+
 ## [2026-04-05] init | Wiki 初始化
 - 名称: LLM-Evaluation-Wiki
 - 领域: 大模型评测（LLM Evaluation & Benchmarking）
@@ -105,3 +157,39 @@
   - wiki/sources/chain-of-thought.md — Chain-of-Thought Prompting (2201.11903)
   - wiki/sources/mmlu.md — MMLU 多任务理解基准 (2009.03300)
 - 更新页面: index.md, log.md
+
+## [2026-04-22] ingest | 3 篇新论文精读摄取
+- 资料路径: `raw/papers/2301.12597-blip2.pdf`, `raw/papers/2304.08485-llava.pdf`, `raw/papers/2307.09288-llama2.pdf`
+- 新建摘要页:
+  - wiki/sources/blip2.md — BLIP-2: Q-Former 视觉语言预训练 (Salesforce, ICML 2023)
+  - wiki/sources/llava.md — LLaVA: 视觉指令微调 (NeurIPS 2023)
+  - wiki/sources/llama2.md — Llama 2: 开源基础和对话模型 (Meta, 2023)
+- 更新页面: wiki/entities/meta.md, wiki/entities/openai.md, wiki/concepts/llm-as-judge.md, wiki/concepts/rubric-based-evaluation.md, index.md, log.md
+
+## [2026-04-22] ingest | 1 篇新闻 + 1 篇博客摄取
+- 资料路径:
+  - `raw/news  /蚂蚁浙大提出基于"评分细则"（Rubric）的奖励机制...md`
+  - `raw/blog/论文评述 Rubric Is All You Need...md`
+- 新建摘要页:
+  - wiki/sources/rubicon-news.md — Rubicon 框架新闻报道（补充 rl-rubric-anchors.md）
+  - wiki/sources/rubric-all-you-need-blog.md — Rubric Is All You Need 博客评述
+- 更新页面: wiki/concepts/rubric-based-evaluation.md, index.md, log.md
+
+## [2026-04-22] ingest | 批量摄取 17 个 GitHub 评测仓库
+- 资料路径: `raw/github/` 下 17 个仓库的 README
+- 新建摘要页（17 个）:
+  - **评测框架**: opencompass-repo.md, lm-evaluation-harness-repo.md, helm-repo.md, evalscope-repo.md, inspect-ai-repo.md
+  - **LLM-as-Judge 评测**: alpaca-eval-repo.md, fastchat-repo.md, prometheus-repo.md
+  - **代码与检索评测**: human-eval-repo.md, beir-repo.md
+  - **Prompt 评测**: promptbench-repo.md
+  - **中文评测**: ceval-repo.md, clue-repo.md, chineseglue-repo.md, superclue-repo.md
+  - **Rubric 工具**: rubric-lib-repo.md, dr-tulu-repo.md
+- 跳过（与评测关联较弱）: EasyLM, LLMZoo, Awesome-LLM-Long-Context-Modeling, ToolBench, ParlAI, fast-agent, miles, training_extensions, transformerlab-app
+- 更新页面: index.md, log.md
+
+## [2026-04-22] update | 下游页面更新
+- 基于新摄取资料更新已有页面:
+  - wiki/entities/meta.md — 添加 Llama 2 信息和评测数据
+  - wiki/entities/openai.md — 添加 InstructGPT、GPT-4 论文链接
+  - wiki/concepts/llm-as-judge.md — 添加 MT-Bench 里程碑、LLaVA 多模态 Judge、Prometheus 开源 Judge、Rubric 库
+  - wiki/concepts/rubric-based-evaluation.md — 添加 Rubicon/DR Tulu RL 应用、教育领域研究、Rubric 库
