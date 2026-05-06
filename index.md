@@ -1,10 +1,11 @@
 # LLM Evaluation Wiki 索引
 
-> 最后更新: 2026-04-23 | 总页面数: 106 | 总资料数: 81
+> 最后更新: 2026-05-06 | 总页面数: 108 | 总资料数: 82
 
 ## 资料摘要
 | 页面 | 类型 | 摘要 | 日期 |
 |------|------|------|------|
+| [TTS-PRISM](wiki/sources/tts-prism.md) | 论文+仓库 | 清华/小米, 12 维中文 TTS 诊断评测框架, Schema-driven Rubric Judge, 7B 超越 Gemini-2.5-Pro | 2026-05-06 |
 | [Rubric-Based 推理数据调研报告](wiki/sources/rubric-based-reasoning-data-survey.md) | 调研报告 | 5 大 Rubric-Based Benchmark 全景调研、6 阶段构建方法论（P0-P5）、编写五大原则、LLM Judge 校准方法 | 2026-04-09 |
 | [Rubric-Forge 报告](wiki/sources/rubric-forge.md) | 内部实践 | 百度内部 Rubric 自动评分系统，一致率从 ~71% 提升到 ~89%，关键洞察：质量重于数量 | 2026-04-09 |
 | [AdvancedIF 仓库文档](wiki/sources/advancedif-repo.md) | 仓库 | Meta 开源评测工具链：3 种任务类型、两种专用 Judge、三级评测指标、CC-BY-NC | 2026-04-09 |
@@ -110,12 +111,13 @@
 | [Meta](wiki/entities/meta.md) | 机构 | Llama 系列开发者，AdvancedIF 开发者 | 2 |
 | [LMSYS / Stanford](wiki/entities/lmsys.md) | 机构 | MT-Bench & Chatbot Arena、FastChat、AlpacaEval、HELM 开发者 | 5 |
 | [Google](wiki/entities/google.md) | 机构 | IFEval、Chain-of-Thought 提出者，Gemini 系列开发者 | 2 |
+| [小米](wiki/entities/xiaomi.md) | 机构 | MiMo-Audio 开发者，TTS-PRISM 语音诊断评测框架 | 1 |
 
 ## 概念与方法论
 | 页面 | 摘要 | 资料数 |
 |------|------|--------|
-| [Rubric-Based 评测方法论](wiki/concepts/rubric-based-evaluation.md) | 细粒度评分标准替代模糊打分，五大原则、六阶段构建流程、四种指标体系、自动 Rubric 生成前沿 | 10 |
-| [LLM-as-Judge](wiki/concepts/llm-as-judge.md) | 用 LLM 作为自动评审者，三种校准方法，一致率基准，评测分解与自适应前沿（DeCE/AdaRubric/UCS） | 10 |
+| [Rubric-Based 评测方法论](wiki/concepts/rubric-based-evaluation.md) | 细粒度评分标准替代模糊打分，五大原则、六阶段构建流程、四种指标体系、自动 Rubric 生成前沿、语音模态扩展 | 11 |
+| [LLM-as-Judge](wiki/concepts/llm-as-judge.md) | 用 LLM 作为自动评审者，三种校准方法，一致率基准，评测分解与自适应前沿（DeCE/AdaRubric/UCS），语音 Judge | 11 |
 | [数字人视频重建质量评测方法](wiki/concepts/digital-human-video-evaluation.md) | 数字人视频重建评测全景：自动指标（CSIM/LPIPS/FVD/LSE 等）、人工 MOS/成对对比、VLM-as-Judge 新范式 | 0 |
 | [RLHF](wiki/concepts/rlhf.md) | 基于人类反馈的强化学习，SFT→RM→PPO 经典流程，DPO/RLVR/Rubric-driven RL 演进方向 | 7 |
 | [多模态大模型评测](wiki/concepts/multimodal-evaluation.md) | VLM 评测基准全景（MME/MMBench/MM-Vet/MathVista/EvalCrafter），评测方法论，BLIP-2/LLaVA 里程碑 | 8 |
