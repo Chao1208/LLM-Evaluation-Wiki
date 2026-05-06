@@ -1,5 +1,22 @@
 # Wiki 操作日志
 
+## [2026-04-23] ingest | 8 篇 Rubric/评测分解前沿论文批量摄取
+- 资料路径: `raw/papers/2603.20882-rubricrag.pdf`, `raw/papers/2603.25133-rubriceval.pdf`, `raw/papers/2603.01562-rubricbench.pdf`, `raw/papers/2509.16093-dece.pdf`, `raw/papers/2603.21362-adarubric.pdf`, `raw/papers/2603.22744-lh-bench.pdf`, `raw/papers/2603.18557-cross-lingual-judge.pdf`, `raw/papers/2601.22025-mves-framework.pdf`
+- 新建摘要页:
+  - wiki/sources/2603.20882-rubricrag.md — RubricRAG: 检索增强 Rubric 生成
+  - wiki/sources/2603.25133-rubriceval.md — RubricEval: Rubric 级元评测基准
+  - wiki/sources/2603.01562-rubricbench.md — RubricBench: LLM Rubric 与人类标准对齐
+  - wiki/sources/2509.16093-dece.md — DeCE: 分解式 Precision+Recall 评测
+  - wiki/sources/2603.21362-adarubric.md — AdaRubric: 任务自适应 Rubric（r=0.79, α=0.83）
+  - wiki/sources/2603.22744-lh-bench.md — LH-Bench: 长周期 Agent 三层评测
+  - wiki/sources/2603.18557-cross-lingual-judge.md — Cross-Lingual Judge: UCS 跨语言迁移
+  - wiki/sources/2601.22025-mves-framework.md — MVES: 评测驱动迭代框架
+- 更新概念页:
+  - wiki/concepts/llm-as-judge.md — 新增"评测分解与自适应"章节（DeCE/AdaRubric/UCS/LH-Bench/RubricEval/MVES）
+  - wiki/concepts/rubric-based-evaluation.md — 新增"自动 Rubric 生成"章节（AdaRubric/RubricRAG/专家vs LLM rubric/元评测）
+- 更新: index.md（总页面数 98→106，总资料数 73→81）
+- 关键发现: 自适应维度生成贡献>骨干模型能力（AdaRubric +0.14r），分解评测 r 从 0.12→0.78（DeCE），专家 rubric κ=0.60>LLM κ=0.46（LH-Bench）
+
 ## [2026-04-22] aggregate | 6 个主题聚合概念页
 - 目的: 消除 36 个孤立资料页，按主题建立导航聚合
 - 新建页面:
