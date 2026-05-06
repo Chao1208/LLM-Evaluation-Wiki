@@ -1,3 +1,7 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
 # LLM Evaluation Wiki — Schema
 
 > 本文件定义了 Wiki 的结构、规范和工作流。LLM Agent 在每次会话开始时读取此文件。
@@ -9,6 +13,76 @@
 - **描述**: 面向大模型评测工作的知识库，持续积累评测方法论、基准测试、模型对比、行业动态和评测实践经验
 - **语言**: 中文为主，术语保留英文
 - **创建日期**: 2026-04-05
+
+## 架构概要
+
+本项目是一个由 LLM Agent 驱动的知识库，不是传统的软件项目。核心操作通过四个自定义 slash command（skill）完成：
+
+| Command | 作用 | 触发 |
+|---------|------|------|
+| `/wiki-init` | 初始化新 Wiki 项目 | 首次搭建 |
+| `/wiki-ingest` | 摄取原始资料 → 生成摘要+更新实体/概念页 | 用户提供新资料时 |
+| `/wiki-query` | 检索 Wiki 回答问题，可选存入 analyses/ | 用户提问时 |
+| `/wiki-lint` | 全量健康检查（矛盾/孤立页/缺失链接等） | 定期维护 |
+
+这四个 command 定义在 `.claude/commands/wiki-*.md`。
+
+### 两层目录
+
+- **根目录 `/`**: Wiki 本体 — `raw/`（只读原始资料）、`wiki/`（生成页面）、`index.md`、`log.md`
+- **`project/`**: 独立研究子项目 **HealRub**（医疗 Rubric 评测），1 个主持人 Agent + 3 个专项 Agent
+
+### Wiki 作为项目核心知识基础设施
+
+**LLM Evaluation Wiki 是 HealRub 项目最重要的竞争优势。** Wiki 中积累了：
+
+- **方法论知识**: LLM-as-Judge、Rubric-Based 评测、Prometheus 系列、HealthBench 等评测框架的深度摘要和对比分析
+- **代码参考**: 28+ 个评测框架仓库（opencompass、lm-evaluation-harness、alpaca_eval、simple-evals 等）的架构分析
+- **实战经验**: 392 语音助手评测集、Rubric-Forge 一致率优化等内部实践的详细记录
+- **学术基础**: 49 篇论文的结构化摘要，覆盖评测方法论、多模态、医疗、代码、金融等领域
+
+HealRub 的各 Agent 都应主动查阅 Wiki（通过 `index.md` 定位 → 读取相关页面）来指导设计和实验决策。Wiki 既是知识库，也是决策参考。
+
+### project/ — HealRub 医疗 Rubric 评测项目
+
+```
+project/
+  CLAUDE.md              # 主持人 Agent（协调全局）
+  design/                # 系统设计文档
+    system-design.md
+  HealRub/               # RD Agent（研发：写代码、跑实验）
+    CLAUDE.md
+    data/                # 全部处理后数据 + 脚本 + 结果
+      scripts/           # step0_*.py, smoke_test_*.py, judge_per_dim.py 等
+      results/           # 实验结果（v0 baseline 已完成）
+      Medbench/splits/   # L2BO 4-Fold + OOS
+  qa/                    # QA Agent（质量保障：独占 OOS、独立验证）
+    CLAUDE.md
+  review/                # Review Agent（设计评审）
+    CLAUDE.md
+  raw-data/              # 原始数据（只读）
+    prompts/             # 4 维度 system prompt
+    rules/               # 标注规范文档
+    evaluation-data/     # 评测 Excel + case study
+  notebooks/             # Jupyter 实验 notebook
+```
+
+4 个 Agent，1 层扁平：
+- **主持人**（`project/`）：全局协调、设计决策、调度 Agent
+- **RD**（`HealRub/`）：写代码、跑实验、迭代 rubric
+- **QA**（`qa/`）：独占 OOS 数据、独立验证、出质量报告
+- **Review**（`review/`）：独立评审设计文档
+
+运行 judge 脚本：
+```bash
+cd project/HealRub/data/scripts
+python3 smoke_test_ray.py              # Ray 集群全量测试
+python3 judge_per_dim.py --case 05_心力衰竭 --dim solution
+```
+
+### 当前 Wiki 规模
+
+~98 个 Wiki 页面，~73 个已摄取资料源，49 篇论文 PDF。涵盖：评测方法论、Rubric 评测、多模态评测、医疗评测、代码评测、金融评测等。
 
 ## 目录结构
 

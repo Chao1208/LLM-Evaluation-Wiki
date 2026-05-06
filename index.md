@@ -1,6 +1,6 @@
 # LLM Evaluation Wiki 索引
 
-> 最后更新: 2026-04-22 | 总页面数: 98 | 总资料数: 73
+> 最后更新: 2026-04-23 | 总页面数: 106 | 总资料数: 81
 
 ## 资料摘要
 | 页面 | 类型 | 摘要 | 日期 |
@@ -78,6 +78,14 @@
 | [Inspect AI 仓库](wiki/sources/inspect-ai-repo.md) | 仓库 | UK AISI, 200+ 预置评测，可组合组件，政府级 AI 安全评测基础设施 | 2026-04-22 |
 | [PromptBench 仓库](wiki/sources/promptbench-repo.md) | 仓库 | Microsoft, Prompt 鲁棒性评测，4 级对抗攻击，DyVal 动态评测 | 2026-04-22 |
 | [BEIR 仓库](wiki/sources/beir-repo.md) | 仓库 | TU Darmstadt, 17 数据集信息检索评测，零样本迁移，多架构支持 | 2026-04-22 |
+| [RubricRAG](wiki/sources/2603.20882-rubricrag.md) | 论文 | 检索增强 Rubric 生成，从已有 rubric 库检索相似 rubric 指导新 rubric 生成 | 2026-04-23 |
+| [RubricEval](wiki/sources/2603.25133-rubriceval.md) | 论文 | Rubric 级元评测基准，3,486 实例，GPT-4o 在 Hard 级仅 55.97% | 2026-04-23 |
+| [RubricBench](wiki/sources/2603.01562-rubricbench.md) | 论文 | 评估 LLM rubric 与人类标准对齐度，覆盖度/精确度/可操作性/正交性评估 | 2026-04-23 |
+| [DeCE](wiki/sources/2509.16093-dece.md) | 论文 | 分解式评测，Precision+Recall 拆分，r 从 0.12 提升至 0.78 | 2026-04-23 |
+| [AdaRubric](wiki/sources/2603.21362-adarubric.md) | 论文 | Alibaba, 任务自适应 Rubric 生成，r=0.79, α=0.83，自适应维度>骨干模型能力 | 2026-04-23 |
+| [LH-Bench](wiki/sources/2603.22744-lh-bench.md) | 论文 | Metaphi.ai, 长周期 Agent 三层评测，专家 rubric κ=0.60 vs LLM κ=0.46，binary-observable | 2026-04-23 |
+| [Cross-Lingual Judge](wiki/sources/2603.18557-cross-lingual-judge.md) | 论文 | CISPA/Amazon, UCS 跨语言评测迁移，英文训练→11+语言零样本迁移 | 2026-04-23 |
+| [MVES 框架](wiki/sources/2601.22025-mves-framework.md) | 论文 | Define-Test-Diagnose-Fix 评测循环，task-specific>generic prompt，MVES 三层框架 | 2026-04-23 |
 
 ## 模型
 | 页面 | 机构 | 摘要 | 资料数 |
@@ -106,8 +114,8 @@
 ## 概念与方法论
 | 页面 | 摘要 | 资料数 |
 |------|------|--------|
-| [Rubric-Based 评测方法论](wiki/concepts/rubric-based-evaluation.md) | 细粒度评分标准替代模糊打分，五大原则、六阶段构建流程、四种指标体系 | 5 |
-| [LLM-as-Judge](wiki/concepts/llm-as-judge.md) | 用 LLM 作为自动评审者，三种校准方法，一致率基准，零样本+CoT 评测范式 | 4 |
+| [Rubric-Based 评测方法论](wiki/concepts/rubric-based-evaluation.md) | 细粒度评分标准替代模糊打分，五大原则、六阶段构建流程、四种指标体系、自动 Rubric 生成前沿 | 10 |
+| [LLM-as-Judge](wiki/concepts/llm-as-judge.md) | 用 LLM 作为自动评审者，三种校准方法，一致率基准，评测分解与自适应前沿（DeCE/AdaRubric/UCS） | 10 |
 | [数字人视频重建质量评测方法](wiki/concepts/digital-human-video-evaluation.md) | 数字人视频重建评测全景：自动指标（CSIM/LPIPS/FVD/LSE 等）、人工 MOS/成对对比、VLM-as-Judge 新范式 | 0 |
 | [RLHF](wiki/concepts/rlhf.md) | 基于人类反馈的强化学习，SFT→RM→PPO 经典流程，DPO/RLVR/Rubric-driven RL 演进方向 | 7 |
 | [多模态大模型评测](wiki/concepts/multimodal-evaluation.md) | VLM 评测基准全景（MME/MMBench/MM-Vet/MathVista/EvalCrafter），评测方法论，BLIP-2/LLaVA 里程碑 | 8 |
