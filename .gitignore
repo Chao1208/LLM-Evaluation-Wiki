@@ -3,6 +3,13 @@
 *.tmp
 *.swp
 *~
-.obsidian/workspace.json
-.obsidian/workspace-mobile.json
 Thumbs.db
+
+# Obsidian
+.obsidian/
+
+# Directories not tracked
+project/
+raw/benchmarks/
+raw/github/
+Clippings/
