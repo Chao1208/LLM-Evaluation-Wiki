@@ -3,8 +3,8 @@ title: "Rubric-Based 评测方法论"
 type: concept
 created: 2026-04-09
 updated: 2026-04-23
-tags: [rubric, 评测方法论, benchmark, 评分标准, RL, Rubicon, adaptive-rubric, rubric-generation]
-sources: [raw/report/Rubric-Based推理数据调研报告.md, raw/report/Rubric-Forge：基于 Rubric 的 LLM 自动评分系统.md, raw/benchmarks/biglaw-bench/README.md, raw/benchmarks/AdvancedIF/README.md, "reinforcement learning with rubric anchors.pdf", "Rubric is all you need.pdf", 2603.21362-adarubric.pdf, 2603.20882-rubricrag.pdf, 2603.25133-rubriceval.pdf, 2603.01562-rubricbench.pdf, 2603.22744-lh-bench.pdf]
+tags: [rubric, 评测方法论, benchmark, 评分标准, RL, Rubicon, adaptive-rubric, rubric-generation, 语音评测]
+sources: [raw/report/Rubric-Based推理数据调研报告.md, raw/report/Rubric-Forge：基于 Rubric 的 LLM 自动评分系统.md, raw/benchmarks/biglaw-bench/README.md, raw/benchmarks/AdvancedIF/README.md, "reinforcement learning with rubric anchors.pdf", "Rubric is all you need.pdf", 2603.21362-adarubric.pdf, 2603.20882-rubricrag.pdf, 2603.25133-rubriceval.pdf, 2603.01562-rubricbench.pdf, 2603.22744-lh-bench.pdf, raw/papers/tts-prism.pdf]
 ---
 
 # Rubric-Based 评测方法论
@@ -162,6 +162,19 @@ LLM 评测中的 Rubric 方法论深受教育评估领域的影响：
 - [Scoring Rubrics 指南](../sources/scoring-rubrics-what-when-how.md)：分析型 vs 整体型 Rubric 开发流程
 - [Rubric 缺陷与改进](../sources/whats-wrong-right-rubrics.md)：四大缺陷批判
 
+## 跨模态应用：语音评测
+
+[TTS-PRISM](../sources/tts-prism.md)（清华/小米, 2026）将 Rubric-Based 评测拓展到**语音合成质量诊断**：
+
+- **12 维层次化 Rubric**: Basic Capability（8 维，1-5 分）+ Advanced Expressiveness（4 维，0-2 分 Bonus），每个维度每个分数等级都有明确的声学标准描述
+- **Schema-driven instruction tuning**: 将 scoring criteria 文本直接注入训练数据，模型先生成基于 rubric 的 rationale 再给分（`[R1, S1, ..., R12, S12]` 交替序列）
+- **7B 模型超越通用大模型**: TTS-PRISM (7B) 在人类对齐度（SRCC）上超越 Gemini-2.5-Pro、Qwen3-Omni (30B)
+- **与 Prometheus 的技术血缘**: 同为 "rubric → rationale → score" 范式，但应用于语音模态，使用 Audio LLM（MiMo-Audio）作为 backbone
+
+这证明了 Rubric-Based 方法论的**模态通用性**：只要能定义明确的分级评分标准，即使是音频等非文本模态也能受益于 rubric-driven 的评测框架。
+
+（来源：[TTS-PRISM](../sources/tts-prism.md)）
+
 ## 相关页面
 
 - [LLM-as-Judge](llm-as-judge.md)
@@ -176,6 +189,7 @@ LLM 评测中的 Rubric 方法论深受教育评估领域的影响：
 - [Rubric Is All You Need 博客](../sources/rubric-all-you-need-blog.md)
 - [Prometheus](../sources/prometheus.md)
 - [Prometheus 2](../sources/prometheus-2.md)
+- [TTS-PRISM](../sources/tts-prism.md)
 - [调研报告](../sources/rubric-based-reasoning-data-survey.md)
 - [Rubric-Forge 报告](../sources/rubric-forge.md)
 - [AdvancedIF 仓库](../sources/advancedif-repo.md)

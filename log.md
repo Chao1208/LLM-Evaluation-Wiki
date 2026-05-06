@@ -210,3 +210,9 @@
   - wiki/entities/openai.md — 添加 InstructGPT、GPT-4 论文链接
   - wiki/concepts/llm-as-judge.md — 添加 MT-Bench 里程碑、LLaVA 多模态 Judge、Prometheus 开源 Judge、Rubric 库
   - wiki/concepts/rubric-based-evaluation.md — 添加 Rubicon/DR Tulu RL 应用、教育领域研究、Rubric 库
+
+## [2026-05-06] ingest | TTS-PRISM: 感知推理语音诊断模型
+- 资料路径: `raw/papers/tts-prism.pdf` + `raw/github/tts-prism/`
+- 摘要页: wiki/sources/tts-prism.md
+- 新建页面: wiki/entities/xiaomi.md
+- 更新页面: wiki/concepts/rubric-based-evaluation.md（添加跨模态语音评测章节）, wiki/concepts/llm-as-judge.md（添加语音 Judge 模型段落）, index.md, log.md
