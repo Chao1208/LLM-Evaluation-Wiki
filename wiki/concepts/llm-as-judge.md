@@ -2,9 +2,9 @@
 title: "LLM-as-Judge"
 type: concept
 created: 2026-04-09
-updated: 2026-04-23
-tags: [LLM-as-Judge, 自动评测, 评测方法论, GPT-4-Judge, MT-Bench, decomposed-evaluation, adaptive-rubric, 语音评测]
-sources: [raw/report/Rubric-Based推理数据调研报告.md, raw/report/Rubric-Forge：基于 Rubric 的 LLM 自动评分系统.md, raw/benchmarks/AdvancedIF/README.md, raw/benchmarks/HealthBench-simple-evals/README.md, 2306.05685-mt-bench-chatbot-arena.pdf, 2304.08485-llava.pdf, 2023.acl-long.870.pdf, 2603.21362-adarubric.pdf, 2509.16093-dece.pdf, 2603.25133-rubriceval.pdf, 2603.22744-lh-bench.pdf, 2603.18557-cross-lingual-judge.pdf, 2601.22025-mves-framework.pdf, raw/papers/tts-prism.pdf]
+updated: 2026-07-08
+tags: [LLM-as-Judge, 自动评测, 评测方法论, GPT-4-Judge, MT-Bench, decomposed-evaluation, adaptive-rubric, 语音评测, rubric-RM]
+sources: [raw/report/Rubric-Based推理数据调研报告.md, raw/report/Rubric-Forge：基于 Rubric 的 LLM 自动评分系统.md, raw/benchmarks/AdvancedIF/README.md, raw/benchmarks/HealthBench-simple-evals/README.md, 2306.05685-mt-bench-chatbot-arena.pdf, 2304.08485-llava.pdf, 2023.acl-long.870.pdf, 2603.21362-adarubric.pdf, 2509.16093-dece.pdf, 2603.25133-rubriceval.pdf, 2603.22744-lh-bench.pdf, 2603.18557-cross-lingual-judge.pdf, 2601.22025-mves-framework.pdf, raw/papers/tts-prism.pdf, 2505.08775-healthbench.pdf, 2510.07743-scalable-synthetic-rubric.pdf]
 ---
 
 # LLM-as-Judge
@@ -65,6 +65,9 @@ LLM 输出多维概率分布，通过小型前馈神经网络（含评审者特�
 | Expert - Expert IRA | 81.3% | PRBench |
 | Rubric-Forge 白盒一致率 | 89.4% | [Rubric-Forge](../entities/rubric-forge.md) (Sonnet 4.6) |
 | Rubric-Forge 黑盒一致率 | 85.2% | Rubric-Forge (Sonnet 4.6) |
+| Grader-医师 一致性 ≈ 医师-医师 | 55–75% | [HealthBench](../benchmarks/healthbench.md) |
+
+> **Grader 可信度的元评测证据**：[HealthBench](../sources/healthbench.md) 用 60,896+ 条元评测样本证明**模型 grader 与医师的一致性 ≈ 医师间一致性**（均在 55–75%），这是 LLM-as-Judge 在高风险专业域可信度的关键论证。Grader Macro-F1：GPT-4.1 0.709 > o4-mini 0.692 > o3 0.681 > GPT-4.1 mini 0.661 > nano 0.580；长度偏差极小（GPT-4o r=−0.053）。
 
 ## 已知问题
 
@@ -123,6 +126,10 @@ LLM 输出多维概率分布，通过小型前馈神经网络（含评审者特�
 
 - [TTS-PRISM](../sources/tts-prism.md)（清华/小米, 2026）：首个面向中文 TTS 的多维度诊断 Judge 模型。基于 MiMo-Audio (7B) backbone，通过 schema-driven instruction tuning 将 12 维评分标准嵌入模型。单次推理同时输出 12 维度的 rationale + score，7B 参数即超越 Gemini-2.5-Pro 在语音评测上的表现。证明了 LLM-as-Judge 范式**从文本到语音模态的可迁移性**。
 
+### Judge 即奖励模型（Rubric-RM）
+
+- [OpenRubrics](../sources/openrubrics.md)（arXiv:2510.07743）将"生成 rubric 再逐条打分"训练成一个**可解释的奖励模型 Rubric-RM**。用 Contrastive Rubric Generation（对比优/劣回答生成 hard rules + principles）+ 偏好标签一致性过滤构建训练数据，Rubric-RM-8B 在奖励建模基准上平均 70.1 / voting@5 达 73.0，比基线 +8.4%，模糊了"Judge"与"Reward Model"的边界。
+
 ### 工具化实现
 
 - [Rubric Python 库](../sources/rubric-lib-repo.md)：提供三种评分策略（PerCriterion / OneShot / RubricAsJudge），支持正负权重和 RL 训练
@@ -154,3 +161,8 @@ LLM 输出多维概率分布，通过小型前馈神经网络（含评审者特�
 - [Cross-Lingual Judge](../sources/2603.18557-cross-lingual-judge.md)
 - [MVES 框架](../sources/2601.22025-mves-framework.md)
 - [TTS-PRISM](../sources/tts-prism.md)
+- [HealthBench 论文摘要](../sources/healthbench.md)
+- [OpenRubrics](../sources/openrubrics.md)
+- [Rubrics as Rewards (RaR)](../sources/rubrics-as-rewards.md)
+- [Reflect-and-Revise](../sources/reflect-and-revise.md)
+- [RubricHub](../sources/rubrichub.md)

@@ -3,9 +3,9 @@ title: "OpenAI"
 type: entity
 entity_type: organization
 created: 2026-04-09
-updated: 2026-04-22
+updated: 2026-07-08
 tags: [机构, LLM, 评测, simple-evals]
-sources: [raw/report/Rubric-Based推理数据调研报告.md, raw/benchmarks/HealthBench-simple-evals/README.md]
+sources: [raw/report/Rubric-Based推理数据调研报告.md, raw/benchmarks/HealthBench-simple-evals/README.md, 2505.08775-healthbench.pdf]
 ---
 
 # OpenAI
@@ -16,9 +16,10 @@ sources: [raw/report/Rubric-Based推理数据调研报告.md, raw/benchmarks/Hea
 
 ## 评测贡献
 
-- 开发了 [HealthBench](../benchmarks/healthbench.md)：医疗领域的 Rubric-Based 评测基准，5,000 对话，48,562 criteria
-- HealthBench 采用 Consensus 机制（34 条通用准则 + 多医师共识），是医疗领域 LLM 评测的重要参考
-- GPT-4.1 用作 HealthBench 的 [LLM Judge](../concepts/llm-as-judge.md)
+- 开发了 [HealthBench](../benchmarks/healthbench.md)：医疗领域的 Rubric-Based 评测基准，5,000 对话，48,562 criteria（[一手论文摘要](../sources/healthbench.md)，arXiv:2505.08775, 2025-05）
+- HealthBench 采用 Consensus 机制（34 条通用准则 + 多医师共识），由 262 位医师历时 11 个月构建，是医疗领域 LLM 评测的重要参考
+- HealthBench 的元评测证明**模型 grader 与医师的一致性 ≈ 医师间一致性**（55–75%），确立了模型评分的可信度
+- GPT-4.1 用作 HealthBench 的 [LLM Judge](../concepts/llm-as-judge.md)（Macro-F1 0.709）
 - 开源了 simple-evals 评测框架，包含 MMLU、MATH-500、GPQA、DROP、MGSM、HumanEval、SimpleQA、BrowseComp、HealthBench 共 9 个评测基准
 - 评测哲学：**零样本 + 思维链**，不使用 few-shot 或角色扮演 prompt
 
@@ -73,6 +74,7 @@ sources: [raw/report/Rubric-Based推理数据调研报告.md, raw/benchmarks/Hea
 ## 相关页面
 
 - [HealthBench](../benchmarks/healthbench.md)
+- [HealthBench 论文摘要](../sources/healthbench.md)
 - [InstructGPT 论文](../sources/instructgpt.md)
 - [GPT-4 Technical Report](../sources/gpt4-technical-report.md)
 - [MT-Bench & Chatbot Arena](../sources/mt-bench-chatbot-arena.md)

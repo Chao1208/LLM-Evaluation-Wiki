@@ -1,11 +1,38 @@
 # LLM Evaluation Wiki 索引
 
-> 最后更新: 2026-05-06 | 总页面数: 108 | 总资料数: 82
+> 最后更新: 2026-07-08 | 总页面数: 137 | 总资料数: 116
 
 ## 资料摘要
 | 页面 | 类型 | 摘要 | 日期 |
 |------|------|------|------|
+| [HealthBench 论文摘要](wiki/sources/healthbench.md) | 论文 | OpenAI, 5,000 对话/48,562 criteria, 262 医师 11 个月构建, grader-医师一致性≈医师间一致性(55-75%), o3=0.60 | 2026-07-08 |
+| [Rubrics as Rewards (RaR)](wiki/sources/rubrics-as-rewards.md) | 论文 | Scale AI, 把 rubric 当 RL 奖励扩展 RLVR 到不可验证域, RaR-Implicit +31% HealthBench, RaR-Medicine/Science 开源 | 2026-07-08 |
+| [OpenRubrics](wiki/sources/openrubrics.md) | 论文 | Purdue 等, Contrastive Rubric Generation(硬规则+原则), 偏好一致性过滤, Rubric-RM-8B 平均 70.1 | 2026-07-08 |
+| [Reflect-and-Revise](wiki/sources/reflect-and-revise.md) | 论文 | 东京大学, 迭代式 rubric 精修(反思循环 T=10), QWK 引导验证集选择, GEPA 简化版, ~200 样本 | 2026-07-08 |
+| [RubricHub](wiki/sources/rubrichub.md) | 论文 | 理想汽车, Coarse-to-Fine 生成+难度演化, ~110k rubric, RuFT+RuRL, Qwen3-14B HealthBench 69.3>GPT-5 | 2026-07-08 |
+| [vadioPK 数字人视频评测调研](wiki/researches/digital-human-video-eval-survey.md) | 调研报告 | THEval/Hallo2/EMO/Loopy/VBench-2.0/VideoScore 全景，反证 SyncNet 与人工负相关，OpenFace AU 已被弃用 | 2026-06-11 |
+| [THEval](wiki/sources/theval.md) | 论文 | Talking-head 8 维评测，ρ=0.870 vs 人工，纯开源 pip 工具栈，实证否定 SyncNet | 2026-06-11 |
 | [TTS-PRISM](wiki/sources/tts-prism.md) | 论文+仓库 | 清华/小米, 12 维中文 TTS 诊断评测框架, Schema-driven Rubric Judge, 7B 超越 Gemini-2.5-Pro | 2026-05-06 |
+| [LLaVA-OneVision](wiki/sources/llava-onevision.md) | 论文 | ByteDance/NTU, 4 阶段课程训练 ~9.4M 样本, 单图→多图→视频统一 VLM | 2026-05-06 |
+| [Cambrian-1](wiki/sources/cambrian-1.md) | 论文 | NYU, 视觉中心数据管线, 9.8M→7M 精选, 20+ 视觉编码器评测 | 2026-05-06 |
+| [ShareGPT4V](wiki/sources/sharegpt4v.md) | 论文 | USTC/上海 AI Lab, GPT-4V 生成 100K 高质量 caption→1.2M 扩展, 替换 3.5% SFT 即提升 | 2026-05-06 |
+| [Stable Diffusion 3](wiki/sources/stable-diffusion-3.md) | 论文 | Stability AI, Rectified Flow + MMDiT, 50/50 合成/原始 caption 训练 | 2026-05-06 |
+| [DALL-E 3](wiki/sources/dalle3-system-card.md) | 论文 | OpenAI, 专用 captioner 训练+合成 caption 替代 alt-text, 文本渲染大幅提升 | 2026-05-06 |
+| [Florence-2](wiki/sources/florence-2.md) | 论文 | Microsoft, FLD-5B (126M 图×54 亿标注), 迭代精炼, 0.77B 媲美 80B | 2026-05-06 |
+| [DataComp](wiki/sources/datacomp.md) | 论文 | 多机构, 128 亿候选→14 亿精选, CLIP 过滤最有效, 数据过滤基准 | 2026-05-06 |
+| [LAION-5B](wiki/sources/laion-5b.md) | 论文 | LAION, 58.5 亿图文对, Common Crawl, CLIP cosine>0.28 过滤 | 2026-05-06 |
+| [PickScore](wiki/sources/pickscore.md) | 论文 | 多机构, 500K+真实用户偏好, 超人类准确率 70.5%, 开源偏好模型 | 2026-05-06 |
+| [VBench](wiki/sources/vbench.md) | 论文 | NTU/港中文, 16 维视频生成评测, 946 prompts, 全自动化工具链 | 2026-05-06 |
+| [ImageReward](wiki/sources/imagereward.md) | 论文 | 清华, 137K 人类偏好数据, BLIP 基础奖励模型, 显著优于 FID/CLIP | 2026-05-06 |
+| [HPSv2](wiki/sources/hpsv2.md) | 论文 | 清华, 798K 偏好选择, 4 风格评测基准, 人类偏好预测 83.3% | 2026-05-06 |
+| [T2I-CompBench](wiki/sources/t2i-compbench.md) | 论文 | NTU/南洋理工, 8000 组合 prompt, 6 维分解评测, 空间关系最难 | 2026-05-06 |
+| [GenAI-Bench](wiki/sources/genai-bench.md) | 论文 | CMU 等, Elo Arena 生成评测, GPT-4o 在 hard case 仅 49% 一致率 | 2026-05-06 |
+| [LMMs-Eval](wiki/sources/lmms-eval.md) | 论文 | 多机构, 50+ 任务统一 VLM 评测框架, Evaluation Trilemma, LiveBench | 2026-05-06 |
+| [CogVideoX](wiki/sources/cogvideox.md) | 论文 | 智谱 AI, 3D VAE + Expert Transformer, 35M clips 训练, 密集标注管线 | 2026-05-06 |
+| [Panda-70M](wiki/sources/panda-70m.md) | 论文 | Snap/UT Austin, 70.8M 视频 caption, 多教师投票, 3.8M HD 视频自动切分 | 2026-05-06 |
+| [InternVid](wiki/sources/internvid.md) | 论文 | 上海 AI Lab, 7M 视频/234M clips, ViCLIP 模型, 多尺度标注管线 | 2026-05-06 |
+| [VTC-CLS](wiki/sources/internvl-2.5.md) | 论文 | 清华, 训练无关视觉 token 压缩, [CLS] attention 选择重要 token | 2026-05-06 |
+| [Qwen2.5-VL](wiki/sources/qwen-vl-2.5.md) | 论文 | 阿里 Qwen, 3B/7B/72B VLM, 动态分辨率, MRoPE, 72B 媲美 GPT-4o | 2026-05-06 |
 | [Rubric-Based 推理数据调研报告](wiki/sources/rubric-based-reasoning-data-survey.md) | 调研报告 | 5 大 Rubric-Based Benchmark 全景调研、6 阶段构建方法论（P0-P5）、编写五大原则、LLM Judge 校准方法 | 2026-04-09 |
 | [Rubric-Forge 报告](wiki/sources/rubric-forge.md) | 内部实践 | 百度内部 Rubric 自动评分系统，一致率从 ~71% 提升到 ~89%，关键洞察：质量重于数量 | 2026-04-09 |
 | [AdvancedIF 仓库文档](wiki/sources/advancedif-repo.md) | 仓库 | Meta 开源评测工具链：3 种任务类型、两种专用 Judge、三级评测指标、CC-BY-NC | 2026-04-09 |
@@ -96,7 +123,7 @@
 | 页面 | 领域 | 摘要 | 资料数 |
 |------|------|------|--------|
 | [PRBench](wiki/benchmarks/prbench.md) | 法律+金融 | Scale AI，1,100 任务 / 19,356 criteria，专家 IRA 93.9% | 2 |
-| [HealthBench](wiki/benchmarks/healthbench.md) | 医疗 | OpenAI，5,000 对话 / 48,562 criteria，Consensus 机制 | 2 |
+| [HealthBench](wiki/benchmarks/healthbench.md) | 医疗 | OpenAI，5,000 对话 / 48,562 criteria，Consensus 机制，后训练主评测台 | 3 |
 | [BigLaw Bench](wiki/benchmarks/biglaw-bench.md) | 法律 | Harvey AI，三层架构 Core+Workflows+Retrieval，正负分 rubric | 2 |
 | [AdvancedIF](wiki/benchmarks/advancedif.md) | 通用指令遵循 | Meta/Llama，1,600+ prompts，3 种任务类型，RIFL 规模化方案 | 2 |
 | [CNFinBench](wiki/benchmarks/cnfinbench.md) | 中国金融合规 | 学术团队，13,000+ 实例，安全-有效性双轨 | 1 |
@@ -105,21 +132,22 @@
 ## 机构与人物
 | 页面 | 类型 | 摘要 | 资料数 |
 |------|------|------|--------|
-| [Scale AI](wiki/entities/scale-ai.md) | 机构 | AI 数据基础设施公司，PRBench 开发者 | 2 |
-| [OpenAI](wiki/entities/openai.md) | 机构 | GPT 系列开发者，HealthBench 与 simple-evals 开发者 | 2 |
+| [Scale AI](wiki/entities/scale-ai.md) | 机构 | AI 数据基础设施公司，PRBench + Rubrics as Rewards 开发者 | 3 |
+| [OpenAI](wiki/entities/openai.md) | 机构 | GPT 系列开发者，HealthBench 与 simple-evals 开发者 | 3 |
 | [Harvey AI](wiki/entities/harvey-ai.md) | 机构 | 法律 AI 公司，BigLaw Bench 开发者，18 人团队 | 2 |
 | [Meta](wiki/entities/meta.md) | 机构 | Llama 系列开发者，AdvancedIF 开发者 | 2 |
 | [LMSYS / Stanford](wiki/entities/lmsys.md) | 机构 | MT-Bench & Chatbot Arena、FastChat、AlpacaEval、HELM 开发者 | 5 |
 | [Google](wiki/entities/google.md) | 机构 | IFEval、Chain-of-Thought 提出者，Gemini 系列开发者 | 2 |
 | [小米](wiki/entities/xiaomi.md) | 机构 | MiMo-Audio 开发者，TTS-PRISM 语音诊断评测框架 | 1 |
+| [理想汽车 (Li Auto)](wiki/entities/li-auto.md) | 机构 | 车企 AI 团队，RubricHub 主导者，Coarse-to-Fine rubric 生成 | 1 |
 
 ## 概念与方法论
 | 页面 | 摘要 | 资料数 |
 |------|------|--------|
-| [Rubric-Based 评测方法论](wiki/concepts/rubric-based-evaluation.md) | 细粒度评分标准替代模糊打分，五大原则、六阶段构建流程、四种指标体系、自动 Rubric 生成前沿、语音模态扩展 | 11 |
-| [LLM-as-Judge](wiki/concepts/llm-as-judge.md) | 用 LLM 作为自动评审者，三种校准方法，一致率基准，评测分解与自适应前沿（DeCE/AdaRubric/UCS），语音 Judge | 11 |
+| [Rubric-Based 评测方法论](wiki/concepts/rubric-based-evaluation.md) | 细粒度评分标准替代模糊打分，五大原则、六阶段构建流程、四种指标体系、自动 Rubric 生成前沿、rubric-as-reward、语音模态扩展 | 16 |
+| [LLM-as-Judge](wiki/concepts/llm-as-judge.md) | 用 LLM 作为自动评审者，三种校准方法，一致率基准，评测分解与自适应前沿（DeCE/AdaRubric/UCS），Rubric-RM，语音 Judge | 13 |
 | [数字人视频重建质量评测方法](wiki/concepts/digital-human-video-evaluation.md) | 数字人视频重建评测全景：自动指标（CSIM/LPIPS/FVD/LSE 等）、人工 MOS/成对对比、VLM-as-Judge 新范式 | 0 |
-| [RLHF](wiki/concepts/rlhf.md) | 基于人类反馈的强化学习，SFT→RM→PPO 经典流程，DPO/RLVR/Rubric-driven RL 演进方向 | 7 |
+| [RLHF](wiki/concepts/rlhf.md) | 基于人类反馈的强化学习，SFT→RM→PPO 经典流程，DPO/RLVR/Rubric-driven RL（RaR/RubricHub）演进方向 | 9 |
 | [多模态大模型评测](wiki/concepts/multimodal-evaluation.md) | VLM 评测基准全景（MME/MMBench/MM-Vet/MathVista/EvalCrafter），评测方法论，BLIP-2/LLaVA 里程碑 | 8 |
 | [评测框架与工具](wiki/concepts/evaluation-frameworks.md) | 12 个开源评测框架对比选型（OpenCompass/lm-eval-harness/HELM/EvalScope/Inspect AI 等） | 12 |
 | [中文评测基准](wiki/concepts/chinese-evaluation-benchmarks.md) | ChineseGLUE→CLUE→C-Eval→SuperCLUE 发展脉络，中文特有评测挑战 | 5 |
@@ -137,3 +165,5 @@
 |------|------|------|
 | [392 Rubrics 可用性提升分析](wiki/analyses/392-rubric-improvement.md) | 392 评测集 rubrics 的五大改进方向：原子化拆分、模板化、统一评分、校准闭环、能力标签 | 2026-04-09 |
 | [数字人视频重建人工评测量表 v1.0](wiki/analyses/digital-human-eval-rubric-v1.md) | 8+1 维度评分体系（对齐 caption 四层结构）、评分流程 SOP、校准培训、VLM 衔接方案 | 2026-04-16 |
+| [视觉模型训练数据全景研究](wiki/analyses/visual-model-training-data-landscape.md) | VLM/图像生成/视频生成训练数据系统梳理：规模对比、多阶段范式、合成 caption 方法论、配比策略 | 2026-05-06 |
+| [视觉模型评测方法全景研究](wiki/analyses/visual-model-evaluation-methods.md) | 图像/视频生成+VLM 理解评测 SOTA 方案：学习偏好模型、分解式评测、VLM-as-Judge 现状与局限 | 2026-05-06 |

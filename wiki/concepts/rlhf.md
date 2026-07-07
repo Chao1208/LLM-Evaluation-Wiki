@@ -2,9 +2,9 @@
 title: "RLHF（基于人类反馈的强化学习）"
 type: concept
 created: 2026-04-22
-updated: 2026-04-22
-tags: [RLHF, 强化学习, 对齐, 奖励模型, PPO, DPO, RLVR]
-sources: []
+updated: 2026-07-08
+tags: [RLHF, 强化学习, 对齐, 奖励模型, PPO, DPO, RLVR, rubric-RL]
+sources: [2507.17746-rubrics-as-rewards.pdf, 2601.08430-rubrichub.pdf]
 ---
 
 # RLHF（基于人类反馈的强化学习）
@@ -52,7 +52,7 @@ RLHF 的标准范式由 [InstructGPT](../sources/instructgpt.md)（OpenAI, 2022�
 
 ### RLVR：可验证奖励
 
-**Reinforcement Learning with Verifiable Rewards**（RLVR）用程序化可验证的奖励信号（如数学答案正确性、指令遵循的约束满足度）替代人类标注，避免了奖励模型的偏差问题。Tulu 3 在 GSM、MATH 和 IFEval 三个领域验证了 RLVR 的有效性。但 RLVR 的局限在于仅适用于有明确可验证答案的任务，对开放式生成任务的适用性有限（来源：[Tulu 3](../sources/2411-recent-eval.md)）。
+**Reinforcement Learning with Verifiable Rewards**（RLVR）用程序化可验证的奖励信号（如数学答案正确性、指令遵循的约束满足度）替代人类标注，避免了奖励模型的偏差问题。Tulu 3 在 GSM、MATH 和 IFEval 三个领域验证了 RLVR 的有效性。但 RLVR 的局限在于仅适用于有明确可验证答案的任务，对开放式生成任务的适用性有限（来源：[Tulu 3](../sources/2411-recent-eval.md)）。近期 [Rubrics as Rewards](../sources/rubrics-as-rewards.md) 把 rubric 视为 RLVR 的自然泛化（单条二值 criterion 即 RLVR），将其扩展到医学/科学等不可验证域。
 
 ### GRPO：高效策略优化
 
@@ -69,6 +69,12 @@ RLHF 的标准范式由 [InstructGPT](../sources/instructgpt.md)（OpenAI, 2022�
 - 有效缓解 reward hacking 风险，增强奖励信号的可解释性
 
 **Evolving Rubrics**（DR Tulu, 2025）：[DR Tulu](../sources/dr-tulu-repo.md) 提出评分标准不是静态的，而应随训练进程**动态演化**——初期使用较宽松标准，随模型能力提升逐步引入更严格、更细粒度的标准，类似 curriculum learning。
+
+**Rubrics as Rewards (RaR)**（Scale AI, 2025）：[RaR](../sources/rubrics-as-rewards.md)（arXiv:2507.17746）系统性地把 rubric 当作 RL 的密集奖励，将 RLVR 从可验证域**扩展到医学/科学等不可验证域**。提出 RaR-Explicit（加权线性聚合）与 RaR-Implicit（judge 整体打分，效果更好）两种策略，Qwen2.5-7B + GRPO 在 [HealthBench](../benchmarks/healthbench.md) 相对提升 **31%**。RaR 将 RLVR 视为"单条二值 criterion"的特例。
+
+**RubricHub**（理想汽车, 2026）：[RubricHub](../sources/rubrichub.md)（arXiv:2601.08430）用 Coarse-to-Fine 生成 + **难度演化（Difficulty Evolution）**构建 ~110k rubric，经 **RuFT + RuRL**（DAPO + verl）两阶段后训练，让 **Qwen3-14B 在 HealthBench 达 69.3，超过 GPT-5（67.2）**。
+
+> ⚠️ **训练场景下负向 criteria 的作用存疑**：RaR 发现去掉 pitfall（负向）criteria 对性能影响甚微；RubricHub 更进一步发现**加惩罚项反而降低** RL 性能（HealthBench 66.2→63.2），故采用纯正向加权。这与评测场景（HealthBench/PRBench 用负分捕捉幻觉）形成对照，详见 [Rubric-Based 评测方法论](rubric-based-evaluation.md)。
 
 Rubric-Driven RL 的核心价值在于：将 RLVR 从"严格可验证任务"扩展到"开放式任务"，用结构化的评分标准替代简单的标量奖励，同时天然提供可解释性。
 
@@ -104,6 +110,8 @@ RLHF 与 LLM 评测之间存在深度的双向关系：
 - [Llama 2](../sources/llama2.md) — Rejection Sampling + PPO 实践
 - [Tulu 3](../sources/2411-recent-eval.md) — SFT/DPO/RLVR 后训练流程
 - [DR Tulu](../sources/dr-tulu-repo.md) — GRPO + Evolving Rubrics
+- [Rubrics as Rewards (RaR)](../sources/rubrics-as-rewards.md) — rubric 作为不可验证域的 RL 奖励
+- [RubricHub](../sources/rubrichub.md) — Coarse-to-Fine 生成 + 难度演化 + RuFT/RuRL
 - [RL with Rubric Anchors](../sources/rl-rubric-anchors.md) — Rubric 驱动 RL 论文
 - [Rubicon 框架报道](../sources/rubicon-news.md) — Rubric 奖励机制新闻解读
 - [RewardBench](../sources/rewardbench.md) — 奖励模型评测基准

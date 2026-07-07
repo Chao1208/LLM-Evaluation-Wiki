@@ -2,9 +2,9 @@
 title: "Rubric-Based 评测方法论"
 type: concept
 created: 2026-04-09
-updated: 2026-04-23
+updated: 2026-07-08
 tags: [rubric, 评测方法论, benchmark, 评分标准, RL, Rubicon, adaptive-rubric, rubric-generation, 语音评测]
-sources: [raw/report/Rubric-Based推理数据调研报告.md, raw/report/Rubric-Forge：基于 Rubric 的 LLM 自动评分系统.md, raw/benchmarks/biglaw-bench/README.md, raw/benchmarks/AdvancedIF/README.md, "reinforcement learning with rubric anchors.pdf", "Rubric is all you need.pdf", 2603.21362-adarubric.pdf, 2603.20882-rubricrag.pdf, 2603.25133-rubriceval.pdf, 2603.01562-rubricbench.pdf, 2603.22744-lh-bench.pdf, raw/papers/tts-prism.pdf]
+sources: [raw/report/Rubric-Based推理数据调研报告.md, raw/report/Rubric-Forge：基于 Rubric 的 LLM 自动评分系统.md, raw/benchmarks/biglaw-bench/README.md, raw/benchmarks/AdvancedIF/README.md, "reinforcement learning with rubric anchors.pdf", "Rubric is all you need.pdf", 2603.21362-adarubric.pdf, 2603.20882-rubricrag.pdf, 2603.25133-rubriceval.pdf, 2603.01562-rubricbench.pdf, 2603.22744-lh-bench.pdf, raw/papers/tts-prism.pdf, 2505.08775-healthbench.pdf, 2507.17746-rubrics-as-rewards.pdf, 2510.07743-scalable-synthetic-rubric.pdf, 2510.09030-reflect-and-revise.pdf, 2601.08430-rubrichub.pdf]
 ---
 
 # Rubric-Based 评测方法论
@@ -49,6 +49,15 @@ Rubric-Based 方法通过将评测标准分解为原子级的 criteria，使每�
 | Critically Detrimental | -8 ~ -10 | 严重错误，使回答根本无效或有害 |
 
 **正向 criterion** 描述好回答应具备的质量；**负向 criterion** 捕捉模型的"过度自信"和"幻觉"，在专业领域尤为关键。推荐比例为 7:3 到 8:2（正:负）。
+
+> ⚠️ **重要矛盾：评测 vs 训练场景下负向 criteria 的作用**
+>
+> 上述 7:3~8:2 正负比来自**评测场景**（PRBench/HealthBench/BigLaw Bench 均用负分扣分捕捉幻觉）。但在 **RL 训练场景**下，多篇近期工作发现负向/惩罚项作用有限甚至有害：
+> - [Rubrics as Rewards (RaR)](../sources/rubrics-as-rewards.md)：去掉 pitfall（负向）criteria 对性能影响甚微，推测"合成负向 criteria 难以生成好，需人类直觉预判失败模式"
+> - [RubricHub](../sources/rubrichub.md)：加惩罚项**反而降低** RL 性能（HealthBench 66.2 → 63.2），归因于 grader 对负向 criteria 准确率低，故采用**纯正向加权**
+> - [Reflect-and-Revise](../sources/reflect-and-revise.md) 引用 Furuhashi et al.(2025)"负向项"：**删除**某些 rubric 组件反而能提升 LLM 表现
+>
+> **结论**：评测场景保留负分扣分（度量幻觉/有害性），训练场景偏向纯正向（避免噪声 grader 误导策略）。二者的负向 criteria 设计应区分对待。
 
 ## 构建方法论（P0-P5 六阶段）
 
@@ -113,6 +122,20 @@ Rubric 不仅用于评测，还越来越多地用于**强化学习的奖励信�
 - 使用 GRPO + evolving rubrics 训练深度研究 agent
 - 8B 模型匹配商业级 Deep Research 系统
 
+### Rubrics as Rewards（Scale AI, 2025）
+
+[Rubrics as Rewards (RaR)](../sources/rubrics-as-rewards.md)（arXiv:2507.17746）把 rubric 当作 RL 的密集奖励信号，将 [RLVR](rlhf.md) 从数学/代码等可验证域**扩展到医学/科学等不可验证的开放域**：
+- **两种聚合策略**：RaR-Explicit（按权重线性加和，可解释）与 RaR-Implicit（把整份 rubric 交给 judge 一次性输出整体分，效果更好）
+- **核心成果**：Qwen2.5-7B + GRPO 在 [HealthBench](../benchmarks/healthbench.md) 相对提升 **31%**，开源 RaR-Medicine（20,166）/ RaR-Science（20,625）
+- **RLVR 是特例**：可验证任务等价于"单条二值 criterion"的 rubric，RaR 是其自然泛化
+
+### RubricHub（理想汽车, 2026）
+
+[RubricHub](../sources/rubrichub.md)（arXiv:2601.08430）用 **Coarse-to-Fine 生成 + 难度演化（Difficulty Evolution）**构建 ~110k 高区分度 rubric，经 **RuFT + RuRL**（DAPO + verl）两阶段后训练：
+- **核心成果**：让 **Qwen3-14B 在 HealthBench 达 69.3，超过 GPT-5（67.2）**
+- **难度演化**：主动生成"接近但错误"的负例来提升 criteria 区分力，克服 rubric 监督的天花板效应
+- **纯正向加权**：实证发现加惩罚项反而降低 RL 性能（见上文负向 criteria 矛盾）
+
 ### 工具化支持
 
 [Rubric Python 库](../sources/rubric-lib-repo.md) 提供了 Rubric 评测和 RL 训练的工程化实现：
@@ -138,6 +161,20 @@ LLM 评测中的 Rubric 方法论深受教育评估领域的影响：
 ### RubricRAG: 检索增强生成
 
 [RubricRAG](../sources/2603.20882-rubricrag.md) 通过检索已有 rubric 库中的相似 rubric 来指导新 rubric 生成，利用领域知识的结构化相似性。
+
+### OpenRubrics: 对比式 Rubric 生成
+
+[OpenRubrics](../sources/openrubrics.md)（arXiv:2510.07743）提出 **Contrastive Rubric Generation (CRG)**：给定 prompt 的一对优/劣回答，让模型对比生成 rubric，同时产出**硬规则（hard rules，可验证约束）**与**原则（principles，语义偏好）**两类 criteria：
+- **偏好标签一致性过滤**：只保留能正确复现原始偏好标签的 rubric，去除噪声
+- **35.7k prompts** 训练出的 **Rubric-RM-8B** 平均 70.1 / voting@5 达 73.0，比基线 +8.4%
+- 证明"生成 rubric 再打分"可作为**奖励模型（Reward Model）**的可解释替代
+
+### Reflect-and-Revise: 迭代式 Rubric 精修
+
+[Reflect-and-Revise](../sources/reflect-and-revise.md)（东京大学, arXiv:2510.09030）将 rubric 生成视为**迭代优化**而非一次成型：
+- **反思循环**：judge 打分 → 与人类标注比对 → 反思失配原因 → 修订 rubric，最多 T=10 轮
+- **QWK 引导的验证集选择**：用 Quadratic Weighted Kappa 挑选最优 rubric 版本，ASAP 数据集最大增益 0.47
+- 是 **GEPA 的简化实现**，仅需 ~200 样本；并印证"删除某些 rubric 组件反而提升表现"（见上文负向 criteria 矛盾）
 
 ### 专家 vs LLM 编写的 Rubric
 
@@ -202,3 +239,9 @@ LLM 评测中的 Rubric 方法论深受教育评估领域的影响：
 - [RubricEval](../sources/2603.25133-rubriceval.md)
 - [RubricBench](../sources/2603.01562-rubricbench.md)
 - [LH-Bench](../sources/2603.22744-lh-bench.md)
+- [HealthBench 论文摘要](../sources/healthbench.md)
+- [Rubrics as Rewards (RaR)](../sources/rubrics-as-rewards.md)
+- [OpenRubrics](../sources/openrubrics.md)
+- [Reflect-and-Revise](../sources/reflect-and-revise.md)
+- [RubricHub](../sources/rubrichub.md)
+- [理想汽车 (Li Auto)](../entities/li-auto.md)

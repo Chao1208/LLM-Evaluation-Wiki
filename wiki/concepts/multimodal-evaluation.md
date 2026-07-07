@@ -2,9 +2,9 @@
 title: "多模态大模型评测"
 type: concept
 created: 2026-04-22
-updated: 2026-04-22
-tags: [多模态, VLM, benchmark, 视觉语言模型, 视频生成]
-sources: []
+updated: 2026-05-06
+tags: [多模态, VLM, benchmark, 视觉语言模型, 视频生成, 图像生成, 人类偏好]
+sources: [raw/papers/vbench.pdf, raw/papers/imagereward.pdf, raw/papers/hpsv2.pdf, raw/papers/t2i-compbench.pdf, raw/papers/genai-bench.pdf, raw/papers/lmms-eval.pdf, raw/papers/pickscore.pdf]
 ---
 
 ## 定义
@@ -99,14 +99,33 @@ sources: []
 - [MathVista](../sources/mathvista.md) -- 视觉数学推理
 - [LVLM-EHub](../sources/lvlm-ehub.md) -- 在线 Arena 综合评测
 - [EvalCrafter](../sources/evalcrafter.md) -- 视频生成评测
+- [VBench](../sources/vbench.md) -- 16 维视频生成全景评测
+- [T2I-CompBench](../sources/t2i-compbench.md) -- 组合文图生成分解评测
+- [GenAI-Bench](../sources/genai-bench.md) -- 生成 AI Elo Arena
 
-### 评测工具
+### 评测工具与框架
 - [VLMEvalKit](../sources/vlmevalkit.md) -- 统一评测工具包
+- [LMMs-Eval](../sources/lmms-eval.md) -- 50+ 任务统一 VLM 评测框架
+
+### 学习偏好模型
+- [ImageReward](../sources/imagereward.md) -- 文图生成人类偏好奖励模型
+- [HPSv2](../sources/hpsv2.md) -- 人类偏好分数 v2
+- [PickScore](../sources/pickscore.md) -- 真实用户偏好评测
 
 ### 代表性模型
 - [BLIP-2](../sources/blip2.md) -- Q-Former 架构
 - [LLaVA](../sources/llava.md) -- 视觉指令微调
+- [LLaVA-OneVision](../sources/llava-onevision.md) -- 4 阶段统一 VLM
+- [Qwen2.5-VL](../sources/qwen-vl-2.5.md) -- 动态分辨率 VLM
+
+### 训练数据
+- [ShareGPT4V](../sources/sharegpt4v.md) -- 合成 caption 数据方法
+- [Cambrian-1](../sources/cambrian-1.md) -- 视觉中心数据精选
 
 ### 相关概念
 - [LLM-as-Judge](llm-as-judge.md) -- GPT-4 评审方法论
 - [数字人视频重建质量评测方法](digital-human-video-evaluation.md) -- 视频质量评测的专项扩展
+
+### 分析报告
+- [视觉模型训练数据全景研究](../analyses/visual-model-training-data-landscape.md)
+- [视觉模型评测方法全景研究](../analyses/visual-model-evaluation-methods.md)

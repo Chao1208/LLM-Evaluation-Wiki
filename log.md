@@ -1,5 +1,48 @@
 # Wiki 操作日志
 
+## [2026-07-08] ingest | 5 篇 Rubric 评测/训练论文（HealthBench + RaR + OpenRubrics + Reflect-and-Revise + RubricHub）
+- 资料路径: `raw/papers/2505.08775-healthbench.pdf`, `raw/papers/2507.17746-rubrics-as-rewards.pdf`, `raw/papers/2510.07743-scalable-synthetic-rubric.pdf`, `raw/papers/2510.09030-reflect-and-revise.pdf`, `raw/papers/2601.08430-rubrichub.pdf`
+- 新建 source 页 (5): healthbench.md, rubrics-as-rewards.md, openrubrics.md, reflect-and-revise.md, rubrichub.md
+- 新建实体页 (1): li-auto.md（理想汽车，RubricHub 主导者）
+- 更新页面: healthbench.md（benchmark 专页回填一手论文摘要链接、排行榜、Consensus/元评测细节）、scale-ai.md（补 RaR）、openai.md（补 HealthBench 一手论文）、rubric-based-evaluation.md（rubric-as-reward + 负向 criteria 矛盾 + OpenRubrics/RubricHub/Reflect-and-Revise 自动生成）、llm-as-judge.md（grader 可信度元评测 + Rubric-RM）、rlhf.md（RaR/RubricHub 加入 Rubric-Driven RL）、index.md、log.md
+- 关键发现:
+  * HealthBench 用 60,896+ 元评测样本证明 grader-医师一致性 ≈ 医师间一致性（55-75%），确立 LLM-as-Judge 在高风险域可信度
+  * RaR 把 rubric 当 RL 密集奖励，将 RLVR 从可验证域扩展到医学/科学，RaR-Implicit +31% HealthBench
+  * RubricHub 用 Qwen3-14B 在 HealthBench 达 69.3，超过 GPT-5（67.2）
+  * OpenRubrics 用 Contrastive Rubric Generation 训练可解释奖励模型 Rubric-RM
+- **重要跨论文矛盾（已在多页标注）**: 评测场景保留负分扣分捕捉幻觉（HealthBench/PRBench 7:3~8:2），但 RL 训练场景负向 criteria 作用有限甚至有害——RaR 去掉 pitfall 影响甚微、RubricHub 加惩罚项反而降低性能（66.2→63.2）、Reflect-and-Revise 引 Furuhashi 2025 删组件反而提升。二者负向 criteria 设计应区分对待。
+
+## [2026-06-11] research | vadioPK 数字人视频评测专项调研
+- 任务来源: vadioPK 项目（短视频对相似度评测），决策"v0.1 用什么 metric"
+- 抓取 raw（暂存于项目内 research/raw/，未全部存 PDF）：
+  arxiv:2511.04520 (THEval), arxiv:2410.07718 (Hallo2),
+  arxiv:2402.17485 (EMO), arxiv:2409.02634 (Loopy),
+  arxiv:2403.17694 (AniPortrait), arxiv:2503.21755 (VBench-2.0),
+  arxiv:2406.15252 (VideoScore), arxiv:2509.22799 (VideoScore2),
+  arxiv:2508.07989 (Motion Blindness), arxiv:2508.00144 (WCS)
+- 新建 source 页 (1): wiki/sources/theval.md
+- 新建 research 报告 (1): wiki/researches/digital-human-video-eval-survey.md
+- 关键发现:
+  * THEval (2025) 以纯 pip 工具栈达到 ρ=0.870 vs 人工 — 比所有
+    talking-head 论文的 metric 组合更可靠
+  * SyncNet 与人工评分**负相关** (LSE-C ρ=−0.16, LSE-D ρ=−0.27)
+  * OpenFace AU 当代 talking-head 论文无人使用，社区改用 E-FID + py-feat
+  * VBench-2.0 显式排除 lip-sync from MLLM judging — Gemini judge 应限制
+    在 A/Z 等静态语义维度
+- 影响: 触发 openspec change `reset-eval-pipeline-to-theval-aligned`
+  (位于 vadioPK 项目内)
+- 调研失败模式记录: 子 agent spawn 两次失败/虚假完成，最终主 agent 自己
+  WebFetch + WebSearch 完成；arxiv abstract 页拿不到正文表格，必须用
+  `/html/<id>` 路径
+
+## [2026-05-06] research | 视觉模型训练数据与评测方法全景研究
+- 资料路径: `raw/papers/llava-onevision.pdf`, `raw/papers/cambrian-1.pdf`, `raw/papers/sharegpt4v.pdf`, `raw/papers/stable-diffusion-3.pdf`, `raw/papers/dalle3-system-card.pdf`, `raw/papers/florence-2.pdf`, `raw/papers/datacomp.pdf`, `raw/papers/laion-5b.pdf`, `raw/papers/pickscore.pdf`, `raw/papers/vbench.pdf`, `raw/papers/imagereward.pdf`, `raw/papers/hpsv2.pdf`, `raw/papers/t2i-compbench.pdf`, `raw/papers/genai-bench.pdf`, `raw/papers/lmms-eval.pdf`, `raw/papers/cogvideox.pdf`, `raw/papers/panda-70m.pdf`, `raw/papers/internvid.pdf`, `raw/papers/qwen-vl-2.5.pdf`
+- 新建摘要页 (20): llava-onevision.md, cambrian-1.md, sharegpt4v.md, stable-diffusion-3.md, dalle3-system-card.md, florence-2.md, datacomp.md, laion-5b.md, pickscore.md, vbench.md, imagereward.md, hpsv2.md, t2i-compbench.md, genai-bench.md, lmms-eval.md, cogvideox.md, panda-70m.md, internvid.md, internvl-2.5.md, qwen-vl-2.5.md
+- 新建分析报告 (2): visual-model-training-data-landscape.md, visual-model-evaluation-methods.md
+- 更新: index.md（总页面数 108→129，总资料数 82→101）
+- 关键发现: "少而精"胜"多而杂"贯穿所有论文；合成 caption 成为标准；学习偏好模型远优于 FID/CLIP；VLM Judge 在图像评测仍不成熟（hard case 仅 49%）
+- 注: `raw/papers/internvl-2.5.pdf` 实际为 VTC-CLS 论文（PDF 命名错误）
+
 ## [2026-04-23] ingest | 8 篇 Rubric/评测分解前沿论文批量摄取
 - 资料路径: `raw/papers/2603.20882-rubricrag.pdf`, `raw/papers/2603.25133-rubriceval.pdf`, `raw/papers/2603.01562-rubricbench.pdf`, `raw/papers/2509.16093-dece.pdf`, `raw/papers/2603.21362-adarubric.pdf`, `raw/papers/2603.22744-lh-bench.pdf`, `raw/papers/2603.18557-cross-lingual-judge.pdf`, `raw/papers/2601.22025-mves-framework.pdf`
 - 新建摘要页:
