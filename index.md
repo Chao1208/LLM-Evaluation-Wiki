@@ -1,10 +1,20 @@
 # LLM Evaluation Wiki 索引
 
-> 最后更新: 2026-07-08 | 总页面数: 137 | 总资料数: 116
+> 最后更新: 2026-08-10 | 总页面数: 153 | 总资料数: 124
 
 ## 资料摘要
 | 页面 | 类型 | 摘要 | 日期 |
 |------|------|------|------|
+| [Dawid & Skene 观察者错误率 EM](wiki/sources/dawid-skene-1979-observer-error-rates-em.md) | 论文 | 1979 JRSS-C, 无真值下 EM 联合估计混淆矩阵与真值分布；原文自陈条件独立假设脆弱（intervening variables） | 2026-08-10 |
+| [Baba & Kashima 两阶段众包质量估计](wiki/sources/hcomp2013-baba-kashima-statistical-quality-estimation-crowdsourcing.md) | 论文 | HCOMP 2013 摘要版, creation+review 两阶段无监督潜变量模型, IRT 阈值离散化连续质量标量 | 2026-08-10 |
+| [Data Programming](wiki/sources/1605.07723-data-programming-creating-large-training-sets-quickly.md) | 论文 | NeurIPS 2016, 标注函数 fixing/reinforcing 有向依赖, 弱监督生成式标签模型 | 2026-08-10 |
+| [Snorkel](wiki/sources/1711.10160-snorkel-weak-supervision.md) | 论文 | 弱监督系统, 标注函数 + 生成式标签模型, 相对无加权组合提升 5.81% | 2026-08-10 |
+| [PA-DSL 设计式纠偏](wiki/sources/2607.15455-design-based-supervised-learning-noisy-human-labels.md) | 论文 | arXiv 2026, 自动标注/审计/裁定三层嵌套 AIPW；抽检与裁定概率须设计已知，明确排除回顾式未记录流水线 | 2026-08-10 |
+| [Partial Identification from LLM Prompts](wiki/sources/2606.15031-partial-identification-from-llm-prompts.md) | 论文 | arXiv 2026, 误差任意相关时 prevalence 识别集退化为 [0,1]，识别力只能来自外部校准 | 2026-08-10 |
+| [Nine Judges, Two Effective Votes](wiki/sources/2605.29800-nine-judges-two-effective-votes.md) | 论文 | arXiv 2026, judge 误差相关使 9 judge 的 Kish 有效票数≈2，反证「多 judge=更多独立证据」 | 2026-08-10 |
+| [CrowdLab](wiki/sources/2210.06812-crowdlab-consensus-labels-quality-scores.md) | 论文 | arXiv 2022, 结合训练好的分类器与多噪声标注者产出共识标签 + 质量分 | 2026-08-10 |
+| [Active Testing](wiki/sources/2103.05331-active-testing-sample-efficient-model-evaluation.md) | 论文 | arXiv 2021, LURE 权重保非均匀采样无偏（须采样概率已知）；代理模型「不同」比「更准」值钱 | 2026-08-10 |
+| [Confidence-Driven Inference](wiki/sources/2408.15204-confidence-driven-inference-llm-annotations.md) | 论文 | arXiv 2024, LLM 自述置信度只决定抽谁不决定答案；κ=0.57 高一致率下纯 LLM 估计方向仍反、覆盖率 0% | 2026-08-10 |
 | [HealthBench 论文摘要](wiki/sources/healthbench.md) | 论文 | OpenAI, 5,000 对话/48,562 criteria, 262 医师 11 个月构建, grader-医师一致性≈医师间一致性(55-75%), o3=0.60 | 2026-07-08 |
 | [Rubrics as Rewards (RaR)](wiki/sources/rubrics-as-rewards.md) | 论文 | Scale AI, 把 rubric 当 RL 奖励扩展 RLVR 到不可验证域, RaR-Implicit +31% HealthBench, RaR-Medicine/Science 开源 | 2026-07-08 |
 | [OpenRubrics](wiki/sources/openrubrics.md) | 论文 | Purdue 等, Contrastive Rubric Generation(硬规则+原则), 偏好一致性过滤, Rubric-RM-8B 平均 70.1 | 2026-07-08 |
@@ -145,7 +155,8 @@
 | 页面 | 摘要 | 资料数 |
 |------|------|--------|
 | [Rubric-Based 评测方法论](wiki/concepts/rubric-based-evaluation.md) | 细粒度评分标准替代模糊打分，五大原则、六阶段构建流程、四种指标体系、自动 Rubric 生成前沿、rubric-as-reward、语音模态扩展 | 16 |
-| [LLM-as-Judge](wiki/concepts/llm-as-judge.md) | 用 LLM 作为自动评审者，三种校准方法，一致率基准，评测分解与自适应前沿（DeCE/AdaRubric/UCS），Rubric-RM，语音 Judge | 13 |
+| [LLM-as-Judge](wiki/concepts/llm-as-judge.md) | 用 LLM 作为自动评审者，三种校准方法，一致率基准，评测分解与自适应前沿（DeCE/AdaRubric/UCS），Rubric-RM，误差相关性与 rating indeterminacy，语音 Judge | 16 |
+| [标注噪声与标注流水线质量](wiki/concepts/annotation-noise-and-pipeline-quality.md) | 参考标签自身的噪声：七大主题簇（标签聚合/两阶段流水线/核验偏差与可识别性/弱监督依赖/judge 误差相关性/PPI 与 active testing/噪声基准），84 篇文献索引 | 18 |
 | [数字人视频重建质量评测方法](wiki/concepts/digital-human-video-evaluation.md) | 数字人视频重建评测全景：自动指标（CSIM/LPIPS/FVD/LSE 等）、人工 MOS/成对对比、VLM-as-Judge 新范式 | 0 |
 | [RLHF](wiki/concepts/rlhf.md) | 基于人类反馈的强化学习，SFT→RM→PPO 经典流程，DPO/RLVR/Rubric-driven RL（RaR/RubricHub）演进方向 | 9 |
 | [多模态大模型评测](wiki/concepts/multimodal-evaluation.md) | VLM 评测基准全景（MME/MMBench/MM-Vet/MathVista/EvalCrafter），评测方法论，BLIP-2/LLaVA 里程碑 | 8 |
@@ -153,7 +164,7 @@
 | [中文评测基准](wiki/concepts/chinese-evaluation-benchmarks.md) | ChineseGLUE→CLUE→C-Eval→SuperCLUE 发展脉络，中文特有评测挑战 | 5 |
 | [代码生成评测](wiki/concepts/code-evaluation.md) | pass@k 执行式评测，函数→类→项目粒度演进，HumanEval/ClassEval/PolyCoder 对比 | 3 |
 | [领域专项评测](wiki/concepts/domain-specific-evaluation.md) | 医疗/法律/金融/翻译/创作/长上下文六大领域评测全景，共性挑战分析 | 9 |
-| [评测方法论基础](wiki/concepts/evaluation-methodology-foundations.md) | LLM 评测综述（What/Where/How）、幻觉分类、IRA/Kappa 统计方法、过拟合检测 | 7 |
+| [评测方法论基础](wiki/concepts/evaluation-methodology-foundations.md) | LLM 评测综述（What/Where/How）、幻觉分类、IRA/Kappa 统计方法、过拟合检测、参考标签噪声与 MAR/MNAR 区分 | 8 |
 
 ## 工具
 | 页面 | 摘要 | 资料数 |

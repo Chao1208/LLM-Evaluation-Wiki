@@ -1,5 +1,16 @@
 # Wiki 操作日志
 
+## [2026-08-10] ingest | 84 篇标注噪声 / 无 gold 可识别性 / 样本高效评测论文
+- 资料路径: `raw/papers/` 新增 84 篇 PDF（1979–2026，跨众包系统、诊断医学统计、计量经济学、弱监督、标签噪声学习、PPI/active testing、LLM-as-Judge 可信度七个社区）
+- 新建概念页 (1): wiki/concepts/annotation-noise-and-pipeline-quality.md —— 七大主题簇 + 全部 84 篇分簇索引表
+- 新建 source 页 (10): dawid-skene-1979-observer-error-rates-em.md, hcomp2013-baba-kashima-statistical-quality-estimation-crowdsourcing.md, 1605.07723-data-programming-creating-large-training-sets-quickly.md, 1711.10160-snorkel-weak-supervision.md, 2607.15455-design-based-supervised-learning-noisy-human-labels.md, 2606.15031-partial-identification-from-llm-prompts.md, 2605.29800-nine-judges-two-effective-votes.md, 2210.06812-crowdlab-consensus-labels-quality-scores.md, 2103.05331-active-testing-sample-efficient-model-evaluation.md, 2408.15204-confidence-driven-inference-llm-annotations.md
+- 关键发现:
+  * **多 judge 投票收益远低于名义值**：Nine Judges 实测 judge 误差相关后，9 个 judge 的 Kish 有效样本量≈2 票；Great Models Think Alike 显示模型越强误差越像。推论：无限 token 买到的是相关重复，不是有效通道数增长
+  * **高一致率不保证下游推断有效**：Confidence-Driven Inference 在 stance 任务 κ=0.57（三设定中最高）下，纯 LLM 的 odds-ratio 估计方向反了、覆盖率 0%
+  * **跨簇收敛的工程判据**：PA-DSL（簇 3）与 active testing/PPI（簇 6）独立地都要求「已知抽样概率的 gold 层」——回顾式、抽检规则未记录的流水线无法使用这整套工具。这为 Argonaut(2015) 的「复核预算里留随机抽检层」提供了理论必要性
+  * **MAR/MNAR 是定义性区分**：抽检只依赖已观测的 (A,x) 是 MAR 不是 MNAR；误标会导致选错整套估计方法
+  * **代理模型「不同」比「更准」值钱**（Active Testing）：随机森林代理评测 ResNet-18 胜过 ResNet 系代理；主动学习采集函数在评测场景反而更差（压制了评测需要的 aleatoric 不确定性）
+
 ## [2026-07-08] ingest | 5 篇 Rubric 评测/训练论文（HealthBench + RaR + OpenRubrics + Reflect-and-Revise + RubricHub）
 - 资料路径: `raw/papers/2505.08775-healthbench.pdf`, `raw/papers/2507.17746-rubrics-as-rewards.pdf`, `raw/papers/2510.07743-scalable-synthetic-rubric.pdf`, `raw/papers/2510.09030-reflect-and-revise.pdf`, `raw/papers/2601.08430-rubrichub.pdf`
 - 新建 source 页 (5): healthbench.md, rubrics-as-rewards.md, openrubrics.md, reflect-and-revise.md, rubrichub.md

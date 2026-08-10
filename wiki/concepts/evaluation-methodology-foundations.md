@@ -2,9 +2,9 @@
 title: "评测方法论基础"
 type: concept
 created: 2026-04-22
-updated: 2026-04-22
-tags: [评测方法论, 综述, 统计方法, 信度, 幻觉, 过拟合, 交叉验证]
-sources: []
+updated: 2026-08-10
+tags: [评测方法论, 综述, 统计方法, 信度, 幻觉, 过拟合, 交叉验证, 标注噪声, 可识别性]
+sources: [2503.05965-validating-llm-judge-rating-indeterminacy.pdf]
 ---
 
 # 评测方法论基础
@@ -63,10 +63,21 @@ sources: []
 | 过拟合 / 数据泄漏 | Benchmark contamination（训练数据包含测试题） |
 | 区分度（Discrimination） | Benchmark 是否能有效区分不同能力水平的模型 |
 
+## 参考标签本身的噪声（2026 新增板块）
+
+上述方法论默认存在一个可信的参考标签。但真实评测集的标签由多阶段人工流水线产出，本身带噪声——这构成所有评测分数的隐含上界。这条线的系统整理见 [标注噪声与标注流水线质量](annotation-noise-and-pipeline-quality.md)，此处只记三条对评测方法论有直接修正作用的结论：
+
+1. **一致率的天花板是标签噪声，不是 judge 能力**。[HealthBench](../benchmarks/healthbench.md) 元评测显示 grader-医师一致性 ≈ 医师间一致性（55–75%）——当人类专家彼此只有这个一致度时，任何 judge 都不可能"更准"，只能更接近人类分布。用 Kappa ≥ 0.80 作通用关卡在高主观性任务上可能根本无法达到。
+2. **MAR 与 MNAR 是定义性区分，不是修辞**。抽检/复核若只依赖已观测量（标注结果 $A$、样本特征 $x$），机制是 MAR，倾向可估、IPW 可用；只有抽检者动用了 $(A,x)$ 之外关于真值的信息才是 MNAR。误标为 MNAR 会导致选错整套估计方法。
+3. **自由度充分性不能推可识别性**。Jones et al.（Biometrics 2009，引 Goodman 1974）明确否掉「自由度 ≥ 参数个数 ⇒ 可识别」。该论证只能反向用（参数维数大于可观测维数 ⇒ 不可识别）。
+
+**Estimand 存在性先于一切**：若任务属 rating indeterminacy 情形（多个合法答案并存），单一潜真值 $Y^*$ 不存在，此时讨论「与真值的一致率」是无意义的（arXiv:2503.05965）。
+
 ## 相关页面
 
 - [Rubric-Based 评测方法论](rubric-based-evaluation.md)
 - [LLM-as-Judge](llm-as-judge.md)
+- [标注噪声与标注流水线质量](annotation-noise-and-pipeline-quality.md) — 参考标签噪声、无 gold 可识别性、有限预算下的有效推断
 - [RLHF](rlhf.md)
 - [LLM 评测综述 (Chang)](../sources/llm-eval-survey-chang.md)
 - [LLM 评测综述 (Future Internet)](../sources/llm-eval-survey-future-internet.md)

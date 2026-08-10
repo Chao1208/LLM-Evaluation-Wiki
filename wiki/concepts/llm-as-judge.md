@@ -3,8 +3,8 @@ title: "LLM-as-Judge"
 type: concept
 created: 2026-04-09
 updated: 2026-07-08
-tags: [LLM-as-Judge, 自动评测, 评测方法论, GPT-4-Judge, MT-Bench, decomposed-evaluation, adaptive-rubric, 语音评测, rubric-RM]
-sources: [raw/report/Rubric-Based推理数据调研报告.md, raw/report/Rubric-Forge：基于 Rubric 的 LLM 自动评分系统.md, raw/benchmarks/AdvancedIF/README.md, raw/benchmarks/HealthBench-simple-evals/README.md, 2306.05685-mt-bench-chatbot-arena.pdf, 2304.08485-llava.pdf, 2023.acl-long.870.pdf, 2603.21362-adarubric.pdf, 2509.16093-dece.pdf, 2603.25133-rubriceval.pdf, 2603.22744-lh-bench.pdf, 2603.18557-cross-lingual-judge.pdf, 2601.22025-mves-framework.pdf, raw/papers/tts-prism.pdf, 2505.08775-healthbench.pdf, 2510.07743-scalable-synthetic-rubric.pdf]
+tags: [LLM-as-Judge, 自动评测, 评测方法论, GPT-4-Judge, MT-Bench, decomposed-evaluation, adaptive-rubric, 语音评测, rubric-RM, 误差相关性]
+sources: [raw/report/Rubric-Based推理数据调研报告.md, raw/report/Rubric-Forge：基于 Rubric 的 LLM 自动评分系统.md, raw/benchmarks/AdvancedIF/README.md, raw/benchmarks/HealthBench-simple-evals/README.md, 2306.05685-mt-bench-chatbot-arena.pdf, 2304.08485-llava.pdf, 2023.acl-long.870.pdf, 2603.21362-adarubric.pdf, 2509.16093-dece.pdf, 2603.25133-rubriceval.pdf, 2603.22744-lh-bench.pdf, 2603.18557-cross-lingual-judge.pdf, 2601.22025-mves-framework.pdf, raw/papers/tts-prism.pdf, 2505.08775-healthbench.pdf, 2510.07743-scalable-synthetic-rubric.pdf, 2605.29800-nine-judges-two-effective-votes.pdf, 2502.04313-great-models-think-alike.pdf, 2503.05965-validating-llm-judge-rating-indeterminacy.pdf]
 ---
 
 # LLM-as-Judge
@@ -82,6 +82,26 @@ LLM 输出多维概率分布，通过小型前馈神经网络（含评审者特�
 ### 偏好偏差
 
 不同 LLM Judge 可能存在系统性偏差（如偏好更长的回答、偏好自身风格的回答）。校准网络（方法 B）试图通过建模评审者差异来缓解这一问题。
+
+### 误差相关性：多 Judge 投票的收益远低于名义值
+
+「多加几个 judge 取投票」这一直觉在实测中不成立——judge 之间的误差高度相关，**有效独立票数远少于 judge 个数**：
+
+- [Nine Judges, Two Effective Votes](../sources/2605.29800-nine-judges-two-effective-votes.md)（arXiv:2605.29800）实测 judge 间平均相关后，9 个 judge 的 Kish 有效样本量只相当于约 2 票
+- Great Models Think Alike（arXiv:2502.04313）用 CAPA 度量发现**模型越强、彼此误差越像**，这直接削弱"用强模型监督强模型"的 AI oversight 前提
+- 推论：**近乎无限的 token 预算买到的是高度相关的重复，不是有效通道数的增长**。把 LLM 当作"第三条独立通道"来恢复识别力，其条件独立性/外生性是待检验的经验命题，不能作为假设直接使用
+
+这与 [HealthBench](../benchmarks/healthbench.md) 的 grader 元评测形成互补视角：单 judge 与人类专家的一致性可以做到接近专家间一致性，但这**不意味着多个 judge 的集成能线性地继续提升可信度**。详见 [标注噪声与标注流水线质量](annotation-noise-and-pipeline-quality.md)。
+
+### Rating Indeterminacy：潜真值未必存在
+
+当任务本身允许多个合法答案时（caption 质量、开放式回答等主观任务），单一潜真值 $Y^*$ 不是良定义的。Validating LLM-as-a-Judge under Rating Indeterminacy（arXiv:2503.05965）指出：此时任何"judge 与真值一致性"的度量都在刻画一个误设模型的伪真参数。实践含义是——先确认 estimand 存在，再谈校准。
+
+### 高一致率 ≠ 可替代人工标注
+
+一个容易被忽略的实证反例来自 [Confidence-Driven Inference](../sources/2408.15204-confidence-driven-inference-llm-annotations.md)：在 stance 分类任务上 LLM 与人类的一致性是全部设定中最高的（$\kappa = 0.57$），但纯 LLM 标注得到的 odds-ratio 估计**方向是错的**、置信区间覆盖率为 0%。
+
+含义：**judge 一致率是标注质量的指标，不是下游统计结论有效性的保证**。若评测的目标是估计某个量（模型间差距、子群体表现差异），正确做法是把 LLM 判定当作"预测"、配一层已知抽样概率的人工标签做逆概率加权纠偏（PPI / active testing 路线），而不是直接用 LLM 标签替代人工。系统整理见 [标注噪声与标注流水线质量](annotation-noise-and-pipeline-quality.md) 簇 6。
 
 ## 评测范式趋势
 
@@ -166,3 +186,5 @@ LLM 输出多维概率分布，通过小型前馈神经网络（含评审者特�
 - [Rubrics as Rewards (RaR)](../sources/rubrics-as-rewards.md)
 - [Reflect-and-Revise](../sources/reflect-and-revise.md)
 - [RubricHub](../sources/rubrichub.md)
+- [标注噪声与标注流水线质量](annotation-noise-and-pipeline-quality.md) — judge 误差相关性、无 gold 可识别性、有限标注预算下的有效推断
+- [Nine Judges, Two Effective Votes](../sources/2605.29800-nine-judges-two-effective-votes.md)
