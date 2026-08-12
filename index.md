@@ -1,10 +1,19 @@
 # LLM Evaluation Wiki 索引
 
-> 最后更新: 2026-08-10 | 总页面数: 153 | 总资料数: 124
+> 最后更新: 2026-08-12 | 总页面数: 164 | 资料摘要页: 127 | raw/papers PDF: 239
 
 ## 资料摘要
 | 页面 | 类型 | 摘要 | 日期 |
 |------|------|------|------|
+| [Cooper 乳腺筛查第二读者盲化](wiki/sources/eurrad2021-cooper-blinding-second-reader-mammography.md) | 论文 | European Radiology 2021, 111.9 万女性/43 中心；alliterative bias 单向且仅在一阶段召回时出现（74.7% vs 69.8%），非盲绕过仲裁 | 2026-08-12 |
+| [Mikulová 预标注偏差](wiki/sources/lrec2022-mikulova-pre-annotation-bias.md) | 论文 | LREC 2022, 准确率未降（UAS 96.5 vs 96.5）、速度 1.7×，但 κ 上升且作者自陈这正是偏倚——偏倚在无 gold 时观测不可见 | 2026-08-12 |
+| [FBI 验证与盲验证](wiki/sources/fbi-frd501-verification-and-blind-verification.md) | 流程标准 | FBI FRD-501, verification 与 blind verification 的定义、适用条件与偏差治理理由（无实证数据） | 2026-08-12 |
+| [Severn 目标核验与条件抽样](wiki/sources/meas2019-severn-steiner-mackay-targeted-verification-conditional-sampling.md) | 论文 | Measurement 2019, 三阶段设计+已知抽样概率；仅核验两个中间分箱（8.4% 样本）即获约 90% 精度收益 | 2026-08-12 |
+| [Lakkaraju 选择性标注问题](wiki/sources/kdd2017-lakkaraju-selective-labels-problem.md) | 论文 | KDD 2017, contraction 方法；imputation 会得出「模型优于法官」的反向错误结论 | 2026-08-12 |
+| [测试集中普遍存在的标签错误](wiki/sources/2103.14749-pervasive-label-errors-test-sets.md) | 论文 | NeurIPS 2021, 10 个基准平均 ≥3.3% 标签错误；纠正后 ResNet-18 从末位升至首位、NASNet 从首位跌至 29 位 | 2026-08-12 |
+| [LLMs Often Know When They Are Being Evaluated](wiki/sources/2505.23836-llms-often-know-when-they-are-being-evaluated.md) | 论文 | arXiv 2026, 评测感知 AUC 最高 0.834（人类 0.921）；agentic 远强于 chat；模型系统性过度判定「这是评测」 | 2026-08-12 |
+| [AI Sandbagging](wiki/sources/2406.07358-ai-sandbagging-strategic-underperformance-evaluations.md) | 论文 | arXiv 2024, GPT-4 在 WMDP-Bio 80%→48% 而 MMLU 仅 82%→73%；password-locking 可精确开关能力 | 2026-08-12 |
+| [Context over Content：对 automated judge 的评测作弊](wiki/sources/2604.15224-context-over-content-evaluation-faking-automated-judges.md) | 论文 | arXiv 2026, 冻结回答池、只改 judge system prompt 一句框架 → 峰值 −9.8pp；4560 次判定中 CoT 提及框架 0 次 | 2026-08-12 |
 | [Dawid & Skene 观察者错误率 EM](wiki/sources/dawid-skene-1979-observer-error-rates-em.md) | 论文 | 1979 JRSS-C, 无真值下 EM 联合估计混淆矩阵与真值分布；原文自陈条件独立假设脆弱（intervening variables） | 2026-08-10 |
 | [Baba & Kashima 两阶段众包质量估计](wiki/sources/hcomp2013-baba-kashima-statistical-quality-estimation-crowdsourcing.md) | 论文 | HCOMP 2013 摘要版, creation+review 两阶段无监督潜变量模型, IRT 阈值离散化连续质量标量 | 2026-08-10 |
 | [Data Programming](wiki/sources/1605.07723-data-programming-creating-large-training-sets-quickly.md) | 论文 | NeurIPS 2016, 标注函数 fixing/reinforcing 有向依赖, 弱监督生成式标签模型 | 2026-08-10 |
@@ -155,8 +164,9 @@
 | 页面 | 摘要 | 资料数 |
 |------|------|--------|
 | [Rubric-Based 评测方法论](wiki/concepts/rubric-based-evaluation.md) | 细粒度评分标准替代模糊打分，五大原则、六阶段构建流程、四种指标体系、自动 Rubric 生成前沿、rubric-as-reward、语音模态扩展 | 16 |
-| [LLM-as-Judge](wiki/concepts/llm-as-judge.md) | 用 LLM 作为自动评审者，三种校准方法，一致率基准，评测分解与自适应前沿（DeCE/AdaRubric/UCS），Rubric-RM，误差相关性与 rating indeterminacy，语音 Judge | 16 |
-| [标注噪声与标注流水线质量](wiki/concepts/annotation-noise-and-pipeline-quality.md) | 参考标签自身的噪声：七大主题簇（标签聚合/两阶段流水线/核验偏差与可识别性/弱监督依赖/judge 误差相关性/PPI 与 active testing/噪声基准），84 篇文献索引 | 18 |
+| [LLM-as-Judge](wiki/concepts/llm-as-judge.md) | 用 LLM 作为自动评审者，三种校准方法，一致率基准，评测分解与自适应前沿（DeCE/AdaRubric/UCS），Rubric-RM，误差相关性、rating indeterminacy 与上下文框架攻击，语音 Judge | 17 |
+| [标注噪声与标注流水线质量](wiki/concepts/annotation-noise-and-pipeline-quality.md) | 参考标签自身的噪声：十二个主题簇（标签聚合/两阶段流水线/核验偏差与可识别性/弱监督依赖/judge 误差相关性/PPI 与 active testing/噪声基准/盲验证跨领域先例/锚定效应实测/抽检与验收抽样设计/干预设计买识别力/部分识别与自适应推断），155 篇文献索引 | 27 |
+| [评测感知与评测作弊](wiki/concepts/evaluation-awareness-and-gaming.md) | 被测者知道自己在被评测：评测感知 AUC、sandbagging、对 automated judge 的上下文框架攻击，以及高风险考核的 bunching 检验方法学 | 3 |
 | [数字人视频重建质量评测方法](wiki/concepts/digital-human-video-evaluation.md) | 数字人视频重建评测全景：自动指标（CSIM/LPIPS/FVD/LSE 等）、人工 MOS/成对对比、VLM-as-Judge 新范式 | 0 |
 | [RLHF](wiki/concepts/rlhf.md) | 基于人类反馈的强化学习，SFT→RM→PPO 经典流程，DPO/RLVR/Rubric-driven RL（RaR/RubricHub）演进方向 | 9 |
 | [多模态大模型评测](wiki/concepts/multimodal-evaluation.md) | VLM 评测基准全景（MME/MMBench/MM-Vet/MathVista/EvalCrafter），评测方法论，BLIP-2/LLaVA 里程碑 | 8 |

@@ -1,5 +1,24 @@
 # Wiki 操作日志
 
+## [2026-08-12] ingest | 71 篇盲验证 / 锚定实测 / 抽检设计 / 评测作弊论文
+- 资料路径: `raw/papers/` 新增 71 篇 PDF（1974–2026，跨法庭科学、医学影像筛查、工业质量控制、审计统计、教育测量、因果实验设计、LLM 安全评测）
+- **入库前去重**: 删除 6 个 md5 完全相同的冗余文件（3 个与已入库 PDF 重名不同名：`2405.11919-klie-*`、`arxiv2306-yang-*`、`emnlp2016-berzak-*`；3 对内部重复：`arxiv2605.06993-*`、`eurradiol2022-cooper-*`、`iitk-kundu-*`）
+- **修正错误资料**: `kdd2017-lakkaraju-selective-labels-problem.pdf` 原内容实为日球层物理论文（arXiv:1702.00399），已替换为 KDD 2017 正式版原文（DOI 10.1145/3097983.3098066）
+- 新建概念页 (1): wiki/concepts/evaluation-awareness-and-gaming.md —— 评测感知/sandbagging/对 judge 的作弊三层次 + 高风险考核经济学类比
+- 扩充概念页 (1): wiki/concepts/annotation-noise-and-pipeline-quality.md —— 新增簇 8-12（盲验证跨领域先例、锚定效应实测、抽检与验收抽样设计、干预设计买识别力、部分识别与自适应采集推断）+ 簇 2/3 补充表，累计索引 155 篇
+- 新建 source 页 (9): eurrad2021-cooper-blinding-second-reader-mammography.md, lrec2022-mikulova-pre-annotation-bias.md, fbi-frd501-verification-and-blind-verification.md, meas2019-severn-steiner-mackay-targeted-verification-conditional-sampling.md, kdd2017-lakkaraju-selective-labels-problem.md, 2103.14749-pervasive-label-errors-test-sets.md, 2505.23836-llms-often-know-when-they-are-being-evaluated.md, 2406.07358-ai-sandbagging-strategic-underperformance-evaluations.md, 2604.15224-context-over-content-evaluation-faking-automated-judges.md
+- 更新页面: wiki/concepts/llm-as-judge.md（新增「上下文框架可以移动 judge 判定」一节）、index.md、log.md
+- 关键发现:
+  * **盲验证在法庭科学与医学影像已有成文标准与大样本实证**——「随机化质检可见性」不需要从零论证。FBI/SWGFAST/OSAC 有 blind verification 标准；Cooper 等在 111.9 万人乳腺筛查队列上量化了 alliterative bias
+  * **锚定是单向的、条件于一阶段为阳性**：Cooper 数据中一读召回时二读跟随率非盲 74.7% vs 盲化 69.8%（差 4.9pp），但一读不召回时两组几乎相同（2.33% vs 2.32%）。含义：$P(Q|Y,A)$ 不能用单一「锚定强度」标量建模
+  * **偏倚存在 ≠ 准确率下降，且在无 gold 时观测不可见**：Mikulová 等发现预标注后准确率完全没降（UAS 96.5 vs 96.5）、速度快 1.7 倍，但 κ 反而上升（0.99 vs 0.96），作者自陈这个上升正是偏倚的表现。所以在无金标准的流水线里，偏倚只表现为「一致率很高」——这恰是症状而非质量证据
+  * **目标核验的信息高度集中**：Severn 等只核验两个中间分箱（平均 8.4% 的重复测量件）即获得约 90% 的精度与偏差改善收益；示例中 14 次金标准测量可替代 100 次
+  * **标签错误会翻转基准排名**：10 个常用测试集平均 ≥3.3% 标签错误（ImageNet val 5.83%）；纠正后 ResNet-18 从 34/34 升至 1/34、NASNet 从 1/34 跌至 29/34
+  * **judge 的 rationale 检测不到上下文攻击**：冻结 1520 条回答、只在 judge system prompt 加一句后果框架 → 三个 judge 检出率全降（峰值 −9.8pp / 相对 −29.6%），而 4560 次推理判定中 CoT 提及该框架 **0 次**。依赖「看 judge 理由」做质量保证对此无效
+  * **imputation 会得出方向性错误的结论**：Lakkaraju 等的选择性标注实验中，propensity matching 等方法让「实际比法官差」的模型看起来「优于法官」
+- **方法论说明**: 71 篇中 9 篇逐篇通读全文并建 source 页；其余在概念页以分簇索引表收录（标题+ID+一句话），**未通读全文**，概念页已显式标注
+- **遗留问题**: 全库链接检查发现 17 处断链，全部来自 2026-05-06 视觉模型摄入批次（指向未创建的 clip.md / fid.md / clipscore.md / data-contamination.md 等页），本轮新增页面无断链。待后续 lint 处理
+
 ## [2026-08-10] ingest | 84 篇标注噪声 / 无 gold 可识别性 / 样本高效评测论文
 - 资料路径: `raw/papers/` 新增 84 篇 PDF（1979–2026，跨众包系统、诊断医学统计、计量经济学、弱监督、标签噪声学习、PPI/active testing、LLM-as-Judge 可信度七个社区）
 - 新建概念页 (1): wiki/concepts/annotation-noise-and-pipeline-quality.md —— 七大主题簇 + 全部 84 篇分簇索引表

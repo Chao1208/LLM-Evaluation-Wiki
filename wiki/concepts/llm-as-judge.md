@@ -103,6 +103,12 @@ LLM 输出多维概率分布，通过小型前馈神经网络（含评审者特�
 
 含义：**judge 一致率是标注质量的指标，不是下游统计结论有效性的保证**。若评测的目标是估计某个量（模型间差距、子群体表现差异），正确做法是把 LLM 判定当作"预测"、配一层已知抽样概率的人工标签做逆概率加权纠偏（PPI / active testing 路线），而不是直接用 LLM 标签替代人工。系统整理见 [标注噪声与标注流水线质量](annotation-noise-and-pipeline-quality.md) 簇 6。
 
+### 上下文框架可以移动 judge 的判定（且 rationale 检测不到）
+
+比偏好偏差更棘手的一类问题：**judge 的判定可以被与内容无关的上下文框架移动**。Context over Content（arXiv:2604.15224）在冻结 1,520 条回答的前提下，只在 judge 的 system prompt 追加一句关于判定后果的描述，三个 judge 的 UNSAFE 检出率全部下降（峰值 −9.8 pp，相对 −29.6%）。
+
+最关键的一点：在 4,560 次推理模型判定中，**没有任何一次 chain-of-thought 提到那句框架**。这意味着"让 judge 给出理由、再人工审理由"这套质量保证手段对这类攻击是无效的。详见 [评测感知与评测作弊](evaluation-awareness-and-gaming.md)。
+
 ## 评测范式趋势
 
 [OpenAI](../entities/openai.md) 的 simple-evals 框架提倡**零样本（zero-shot）+ 思维链（chain-of-thought）**评测设定，不使用 few-shot 或角色扮演 prompt。认为这种方式更能反映模型在实际使用中的表现，代表了从"评估 base model"向"评估 chat model"的范式转变。（来源：[simple-evals 仓库](../sources/simple-evals-repo.md)）
@@ -187,4 +193,5 @@ LLM 输出多维概率分布，通过小型前馈神经网络（含评审者特�
 - [Reflect-and-Revise](../sources/reflect-and-revise.md)
 - [RubricHub](../sources/rubrichub.md)
 - [标注噪声与标注流水线质量](annotation-noise-and-pipeline-quality.md) — judge 误差相关性、无 gold 可识别性、有限标注预算下的有效推断
+- [评测感知与评测作弊](evaluation-awareness-and-gaming.md) — 上下文框架攻击、sandbagging、评测感知
 - [Nine Judges, Two Effective Votes](../sources/2605.29800-nine-judges-two-effective-votes.md)
