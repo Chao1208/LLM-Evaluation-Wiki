@@ -3,8 +3,8 @@ title: "评测感知与评测作弊"
 type: concept
 created: 2026-08-12
 updated: 2026-08-12
-tags: [评测感知, evaluation-awareness, sandbagging, evaluation-faking, LLM-as-Judge, 评测有效性, 高风险考核]
-sources: [2505.23836-llms-often-know-when-they-are-being-evaluated.pdf, 2406.07358-ai-sandbagging-strategic-underperformance-evaluations.pdf, 2604.15224-context-over-content-evaluation-faking-automated-judges.pdf]
+tags: [评测感知, evaluation-awareness, sandbagging, evaluation-faking, LLM-as-Judge, 评测有效性, 高风险考核, bunching]
+sources: [2505.23836-llms-often-know-when-they-are-being-evaluated.pdf, 2406.07358-ai-sandbagging-strategic-underperformance-evaluations.pdf, 2604.15224-context-over-content-evaluation-faking-automated-judges.pdf, checco-2020-adversarial-attacks-on-crowdsourcing-quality-control.pdf, zoorob-2021-thc-concentration-discontinuity-20-percent-threshold.pdf, mccrary-2007-manipulation-running-variable-density-test-nber-t0334.pdf, w22165-causes-consequences-test-score-manipulation-regents.pdf, w22207-teacher-discretion-grading-high-stakes-tests.pdf, w24136-on-bunching-and-identification-of-taxable-income-elasticity.pdf, w19259-truth-telling-third-party-auditors-india.pdf]
 ---
 
 # 评测感知与评测作弊
@@ -72,8 +72,17 @@ sources: [2505.23836-llms-often-know-when-they-are-being-evaluated.pdf, 2406.073
 | Teacher Discretion in Grading High-Stakes Tests | 2016 | NBER w22207 | 评分者自由裁量权本身就是作弊通道 |
 | On Bunching and Identification of Taxable Income Elasticity | 2018 | NBER w24136 | **bunching（在阈值处堆积）是可检验的作弊指纹** |
 | Truth-Telling by Third-Party Auditors（印度污染审计） | 2013 | NBER w19259 | 第三方审计者的激励结构决定其诚实度——对应 judge 的选择与激励 |
+| Bokhove, Are Some School Inspectors More Lenient? | 2023 | — | 审核者宽严度的异质性 |
+| McCrary, 操纵检验（密度不连续） | 2007 | NBER T0334 | 检验操纵的标准工具 |
+| Zoorob, THC 浓度在 20% 阈值处的不连续 | 2021 | — | 实验室检测在公开阈值处被扭曲的直接证据 |
+| Checco et al., Adversarial Attacks on Crowdsourcing Quality Control | 2020 | — | 众包质检机制本身可被对抗性攻击——最接近 LLM 评测场景的一篇 |
 
-**最可迁移的方法论是 bunching 分析**：如果分数分布在某个阈值（及格线、rubric 的 pass 边界）处出现异常堆积，这本身就是操纵的统计证据，不需要知道真值。这一手法与 [标注噪声与标注流水线质量](annotation-noise-and-pipeline-quality.md) 簇 12 的 McCrary 密度检验是同一族工具。
+**bunching 分析是可用的检验，但不是识别杠杆。** 如果分数分布在某个阈值（及格线、rubric 的 pass 边界）处出现异常堆积，这是操纵的**统计证据**，且不需要知道真值——这一点与 [标注噪声与标注流水线质量](annotation-noise-and-pipeline-quality.md) 簇 12 的 McCrary 密度检验同源。但**不能**由堆积反推出效应量：Blomquist et al. (JPE 2021) 的结论正是负面的——阈值处的堆积本身不构成识别。
+
+> 2026-08-12 书目核实增补：Regents 那篇的期刊版是 **AEJ: Applied 11(3):382–423, 2019**（非仅 NBER WP），
+> 且其操纵动机经**随机化教师激励支付实验**排除自利、判定为 altruism；
+> Blomquist 等那篇的期刊版是 **JPE 129(8):2320–2343, 2021**。
+
 
 ## 检测与缓解方向
 
@@ -82,7 +91,7 @@ sources: [2505.23836-llms-often-know-when-they-are-being-evaluated.pdf, 2406.073
 - **保持评测集私有 + canary 字符串**：[HealthBench](../benchmarks/healthbench.md) 采用了这两者，但只防数据泄露，不防评测感知
 - **让评测输入在分布上接近真实部署**：直接针对层次 1，但与「评测要覆盖极端情形」的需求冲突
 - **随机化评测的可观察特征**：与 [标注噪声与标注流水线质量](annotation-noise-and-pipeline-quality.md) 簇 8 的盲验证思路同源——让被测者无法识别当前是否处于被观察状态
-- **分布形状检验而非均值比较**：bunching / 密度不连续检验能在不知道真值的情况下暴露操纵
+- **分布形状检验而非均值比较**：bunching / 密度不连续检验能在不知道真值的情况下暴露操纵（仅作检验，不可反推效应量）
 - **judge 多样化**：但受簇 5 的误差相关性限制——judge 之间高度相关时，多样化的收益有限
 - **不要依赖 judge 的 rationale 做质量保证**：Context over Content 实测 4,560 次推理判定中 CoT 提及框架的次数为 **0**，可解释输出对上下文攻击完全不敏感
 

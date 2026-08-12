@@ -23,12 +23,14 @@
 - 资料路径: `raw/papers/` 新增 84 篇 PDF（1979–2026，跨众包系统、诊断医学统计、计量经济学、弱监督、标签噪声学习、PPI/active testing、LLM-as-Judge 可信度七个社区）
 - 新建概念页 (1): wiki/concepts/annotation-noise-and-pipeline-quality.md —— 七大主题簇 + 全部 84 篇分簇索引表
 - 新建 source 页 (10): dawid-skene-1979-observer-error-rates-em.md, hcomp2013-baba-kashima-statistical-quality-estimation-crowdsourcing.md, 1605.07723-data-programming-creating-large-training-sets-quickly.md, 1711.10160-snorkel-weak-supervision.md, 2607.15455-design-based-supervised-learning-noisy-human-labels.md, 2606.15031-partial-identification-from-llm-prompts.md, 2605.29800-nine-judges-two-effective-votes.md, 2210.06812-crowdlab-consensus-labels-quality-scores.md, 2103.05331-active-testing-sample-efficient-model-evaluation.md, 2408.15204-confidence-driven-inference-llm-annotations.md
+- 更新页面: wiki/concepts/llm-as-judge.md（新增「误差相关性」「rating indeterminacy」「高一致率≠可替代人工标注」三节）、wiki/concepts/evaluation-methodology-foundations.md（新增「参考标签本身的噪声」板块）、index.md、log.md
 - 关键发现:
   * **多 judge 投票收益远低于名义值**：Nine Judges 实测 judge 误差相关后，9 个 judge 的 Kish 有效样本量≈2 票；Great Models Think Alike 显示模型越强误差越像。推论：无限 token 买到的是相关重复，不是有效通道数增长
   * **高一致率不保证下游推断有效**：Confidence-Driven Inference 在 stance 任务 κ=0.57（三设定中最高）下，纯 LLM 的 odds-ratio 估计方向反了、覆盖率 0%
   * **跨簇收敛的工程判据**：PA-DSL（簇 3）与 active testing/PPI（簇 6）独立地都要求「已知抽样概率的 gold 层」——回顾式、抽检规则未记录的流水线无法使用这整套工具。这为 Argonaut(2015) 的「复核预算里留随机抽检层」提供了理论必要性
   * **MAR/MNAR 是定义性区分**：抽检只依赖已观测的 (A,x) 是 MAR 不是 MNAR；误标会导致选错整套估计方法
   * **代理模型「不同」比「更准」值钱**（Active Testing）：随机森林代理评测 ResNet-18 胜过 ResNet 系代理；主动学习采集函数在评测场景反而更差（压制了评测需要的 aleatoric 不确定性）
+- **方法论说明**: 84 篇中 10 篇逐篇通读全文并建 source 页；其余 74 篇在概念页以分簇索引表收录（标题+ID+一句话），描述基于标题与既有概念页的引用语境，**未通读全文**，概念页已就此显式标注
 
 ## [2026-07-08] ingest | 5 篇 Rubric 评测/训练论文（HealthBench + RaR + OpenRubrics + Reflect-and-Revise + RubricHub）
 - 资料路径: `raw/papers/2505.08775-healthbench.pdf`, `raw/papers/2507.17746-rubrics-as-rewards.pdf`, `raw/papers/2510.07743-scalable-synthetic-rubric.pdf`, `raw/papers/2510.09030-reflect-and-revise.pdf`, `raw/papers/2601.08430-rubrichub.pdf`
@@ -289,3 +291,25 @@
 - 摘要页: wiki/sources/tts-prism.md
 - 新建页面: wiki/entities/xiaomi.md
 - 更新页面: wiki/concepts/rubric-based-evaluation.md（添加跨模态语音评测章节）, wiki/concepts/llm-as-judge.md（添加语音 Judge 模型段落）, index.md, log.md
+
+## [2026-08-07] ingest | 众包质量估计 / 标注流水线相关论文 5 篇
+- 新增 PDF (5): 1605.04481-anchoring-and-agreement-in-syntactic-annotations.pdf, aij2013-turkontrol-pomdp-control-crowdsourcing-workflows.pdf, jmlr2016-spectral-methods-meet-em-optimal-crowdsourcing.pdf, pvldb2015-argonaut-macrotask-crowdsourcing-complex-data-processing.pdf, hcomp2013-baba-kashima-statistical-quality-estimation-crowdsourcing.pdf
+- 归属概念页: wiki/concepts/annotation-noise-and-pipeline-quality.md
+- 更新页面: index.md, log.md
+
+## [2026-08-10] ingest | 付费墙论文假设集核实（Tai & Zhou / Sato & Miyazawa / Hansen et al.）
+- Tai & Zhou (AoAS 2025, 10.1214/25-AOAS2081): 其 Assumption 2 **要求** index test 与不完美参考标准条件独立（T(CST) 与 S(amyloid PET)），辩护理由「T and S derive information from distinct sources」，模拟 Scenario G 专门用 corr(T,S)=0.355 违背它。高置信但非全文确证（证据为已索引全文片段 + 出版页元数据）
+- Sato & Miyazawa (LRE 2022, 10.1007/s10579-022-09617-0): **含 review 阶段，已确证**（LREC 2020 前身全文 2020.lrec-1.29 + Springer 图注 + 官方代码输入格式 creation.tsv / review.tsv 三方交叉）；reviewer 看 artifact 且被刻意盲化（不告知 creator 意图）、review 全覆盖无抽检
+- Hansen et al. (CSCW 2013, 10.1145/2441776.2441848): **未获全文**。ACM DL/ResearchGate 订阅墙、BYU ScholarsArchive 站内检索 HTTP 500、Unpaywall/OpenAlex/S2 三方均 closed。间接证据（摘要 + 59 篇引文上下文）指向 field experiment 式机制对比、无建模痕迹，按铁律不下断言
+- 新增 PDF (2): aoas2025-tai-zhou-simultaneous-adjustment-verification-imperfect-gold-firstpage.pdf（首页预览）, lrec2020-sato-miyazawa-quality-estimation-partially-subjective-classification.pdf（全文 CC-BY-NC）
+- 更新页面: index.md, log.md
+
+## [2026-08-12] ingest | 阈值处操纵与 bunching 检验相关论文 8 篇
+- 主题: 监控统计量在公开阈值处被扭曲的跨领域证据与检验工具（教育考试评分、环境审计、汽车检测、实验室检测），以及 bunching / McCrary 密度检验一族方法
+- 关键书目核实: Dee, Dobbie, Jacob & Rockoff 的期刊版为 **AEJ: Applied 11(3):382–423, 2019**（非仅 NBER w22165）；Blomquist, Newey, Kumar & Liang 的期刊版为 **JPE 129(8):2320–2343, 2021**，且其结论方向为**负面**——「阈值处的堆积本身不构成识别」，故 bunching 是可用的**检验**指纹而非识别杠杆
+- 另核实通过: QE 11(3):839–870 (Gerard-Rokkanen-Rothe, 操纵下 sharp bounds) ✓、J. Law & Econ 33(1):233–276 (Feinstein, detection controlled estimation) ✓、QJE 128(4):1499–1545 (Duflo-Greenstone-Pande-Ryan, 第三方审计者) ✓
+- 新增 PDF (8): w22165-causes-consequences-test-score-manipulation-regents.pdf, w22207-teacher-discretion-grading-high-stakes-tests.pdf, w19259-truth-telling-third-party-auditors-india.pdf, w24136-on-bunching-and-identification-of-taxable-income-elasticity.pdf, mccrary-2007-manipulation-running-variable-density-test-nber-t0334.pdf, bokhove-2023-are-some-school-inspectors-more-lenient-than-others.pdf, zoorob-2021-thc-concentration-discontinuity-20-percent-threshold.pdf, checco-2020-adversarial-attacks-on-crowdsourcing-quality-control.pdf
+- 检索条件（**必须随结论一并引用**）: WebSearch 全会话配额已耗尽，Google Scholar 不可用，Semantic Scholar 持续 429。全部 165 条查询（OpenAlex 91 / Crossref 52 / arXiv 22）走 API **标题与摘要字段**匹配，**无任何全文检索通道**。故本轮「未检索到」不得被引为「该方向为学术空白」
+- 遗留缺口: ① 会计/OB「主管评分宽容化」是否有门限版本（找到 Bol TAR 86:1549–1575, 2011 等核心文献，但摘要无阈值堆积内容）② arXiv `peer prediction` + `external incentives` 查询 429 未取回 ③ MSA / Gage R&R attribute agreement analysis 仍未查成
+- 归属概念页: wiki/concepts/evaluation-awareness-and-gaming.md
+- 更新页面: index.md, log.md

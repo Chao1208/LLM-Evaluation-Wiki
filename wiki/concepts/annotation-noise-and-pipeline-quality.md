@@ -311,6 +311,7 @@ sources: [dawid-skene-1979-observer-error-rates-em.pdf, hcomp2013-baba-kashima-s
 
 ### 簇 2 / 簇 3 的第二批补充
 
+第二批语料对前两簇的直接补强，其中三篇解决了第一批调研遗留的关键未知量：
 
 | 论文 | 年份 | 归属簇 | 关键点 |
 |---|---|---|---|
