@@ -1,10 +1,16 @@
 # LLM Evaluation Wiki 索引
 
-> 最后更新: 2026-08-12 | 总页面数: 163 | 资料摘要页: 127 | raw/papers PDF: 241
+> 最后更新: 2026-08-22 | 总页面数: 166 | 资料摘要页: 130 | raw/papers PDF: 243
 
 ## 资料摘要
 | 页面 | 类型 | 摘要 | 日期 |
 |------|------|------|------|
+| [Horowitz & Manski 1992：数据有误差时的识别与稳健性](wiki/sources/horowitz-manski-1992-identification-and-robustness-in-the-presence-of-errors-in-data.md) | 论文 | SSRI 工作论文（发表版 Econometrica 1995, 63(2):281-302）。contaminated/corrupted sampling 下 P₁₁、P₁ 的 tight 界与四个 regime；trivial（1−λ≤Q≤λ，双边触界）与 identification breakdown（min[Q,1−Q]，单边触界）是两个门槛；Q 永在识别集内 ⇒ 不可否证 P₁=P₁₁=Q；逐坐标区间乘积（箱）是外界而非锐识别集；命题 4／推论 4.1 给出尊重随机占优的泛函与单调 g 的线性泛函 ∫g dψ 的锐界；推论 5.1 给 plug-in ± λ×gross-error sensitivity 的一阶界（疑为外界） | 2026-08-22 |
+| [图不完整下的排序部分识别（Crippa & Fedchenko）](wiki/sources/2410.18272-partially-identified-rankings-from-pairwise-interactions.md) | 论文 | econ.EM 2410.18272，成对交互图不完整时排序的部分识别：SST 非参数模型下需图直径≤2 才点识别；moment-inequality 式的锐识别集刻画 + 似然比检验；观测量在被观测边上精确无偏，部分识别来源是图不完整而非观测偏置 | 2026-08-21 |
+| [排序模型混合的代数几何可识别性](wiki/sources/2201.13132-identifiability-of-mixtures-of-ranking-models.md) | 论文 | cs.LG 2201.13132，两组分 BTL/MNL-3-slate/Plackett-Luce 混合的一般可识别性（generic identifiability），Gröbner 基+Zariski 闭集框架；混合权重为待点识别连续参数，不设上界、不用传递性反推 | 2026-08-21 |
+| [不确定金标下的评价（Stutz 等）](wiki/sources/2307.02191-evaluating-ai-systems-under-uncertain-ground-truth.md) | 论文 | Medical Image Analysis 2025 / arXiv 2307.02191, PrIRN 与 Plackett-Luce 聚合 + uncertainty-adjusted 指标；可靠度参数 γ 等价于标注者数量；set accuracy 会改变分类器排序（定性）；含 CIFAR-10H 与 AVA 案例 | 2026-08-20 |
+| [Maier-Hein 挑战赛排序敏感性](wiki/sources/1806.02051-why-rankings-of-biomedical-challenges-interpreted-with-care.md) | 论文 | Nature Communications 2018, 「Different annotators produce different winners」：13 组两两观察者比较中 15%/46%/62% 改变排序（Kendall τ 下界 −0.02）；去掉一个测试样例即可换冠军 | 2026-08-20 |
+| [Clinical Uncertainty Impacts ML Evaluations](wiki/sources/2509.22242-clinical-uncertainty-impacts-ml-evaluations.md) | 论文 | ML4H 2025 Findings, 软标签指标 s-AUROC/s-AP；13 个医学影像任务上重排名次含第一名，AUROC 的 ordinary↔soft R² 低至 0.465 而同任务 AP 为 0.983 | 2026-08-20 |
 | [Cooper 乳腺筛查第二读者盲化](wiki/sources/eurrad2021-cooper-blinding-second-reader-mammography.md) | 论文 | European Radiology 2021, 111.9 万女性/43 中心；alliterative bias 单向且仅在一阶段召回时出现（74.7% vs 69.8%），非盲绕过仲裁 | 2026-08-12 |
 | [Mikulová 预标注偏差](wiki/sources/lrec2022-mikulova-pre-annotation-bias.md) | 论文 | LREC 2022, 准确率未降（UAS 96.5 vs 96.5）、速度 1.7×，但 κ 上升且作者自陈这正是偏倚——偏倚在无 gold 时观测不可见 | 2026-08-12 |
 | [FBI 验证与盲验证](wiki/sources/fbi-frd501-verification-and-blind-verification.md) | 流程标准 | FBI FRD-501, verification 与 blind verification 的定义、适用条件与偏差治理理由（无实证数据） | 2026-08-12 |
@@ -167,6 +173,8 @@
 | [LLM-as-Judge](wiki/concepts/llm-as-judge.md) | 用 LLM 作为自动评审者，三种校准方法，一致率基准，评测分解与自适应前沿（DeCE/AdaRubric/UCS），Rubric-RM，误差相关性、rating indeterminacy 与上下文框架攻击，语音 Judge | 17 |
 | [标注噪声与标注流水线质量](wiki/concepts/annotation-noise-and-pipeline-quality.md) | 参考标签自身的噪声：十二个主题簇（标签聚合/两阶段流水线/核验偏差与可识别性/弱监督依赖/judge 误差相关性/PPI 与 active testing/噪声基准/盲验证跨领域先例/锚定效应实测/抽检与验收抽样设计/干预设计买识别力/部分识别与自适应推断），155 篇文献索引 | 27 |
 | [评测感知与评测作弊](wiki/concepts/evaluation-awareness-and-gaming.md) | 被测者知道自己在被评测：评测感知 AUC、sandbagging、对 automated judge 的上下文框架攻击，以及高风险考核的 bunching 检验方法学 | 3 |
+| [符号可解性与定性矩阵理论](wiki/concepts/sign-solvability-qualitative-matrix-theory.md) | 只知符号、幅度完全任意时线性系统的哪些性质仍被决定：sign-solvable / L-matrix / SNS / sign-central / 定性 Farkas 概念族与复杂度，以及排序侧「对锥内所有权重都成立」的对偶锥刻画（Stein 1994、Viappiani 2020） | 2 |
+| [混合比例的单侧可识别性](wiki/concepts/mixture-proportion-one-sided-identifiability.md) | `F = (1−κ)G + κH` 中 `κ` 只有一侧可识别：`κ*` 的 `ess inf f/h` 闭式、识别集 `[0, κ*]`，以及四个学科对同一条件的四个名字（purity / properness / irreducibility / anchor set）与术语对照 | 6 |
 | [数字人视频重建质量评测方法](wiki/concepts/digital-human-video-evaluation.md) | 数字人视频重建评测全景：自动指标（CSIM/LPIPS/FVD/LSE 等）、人工 MOS/成对对比、VLM-as-Judge 新范式 | 0 |
 | [RLHF](wiki/concepts/rlhf.md) | 基于人类反馈的强化学习，SFT→RM→PPO 经典流程，DPO/RLVR/Rubric-driven RL（RaR/RubricHub）演进方向 | 9 |
 | [多模态大模型评测](wiki/concepts/multimodal-evaluation.md) | VLM 评测基准全景（MME/MMBench/MM-Vet/MathVista/EvalCrafter），评测方法论，BLIP-2/LLaVA 里程碑 | 8 |
